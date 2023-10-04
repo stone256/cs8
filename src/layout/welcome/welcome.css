@@ -1,0 +1,43 @@
+html {
+    height: 100%;
+    background: aquamarine;
+}
+
+body {
+    height: 20%;
+    padding: 0;
+    margin: 0;
+
+}
+.main {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    /* Horizontally center the content */
+    align-items: center;
+    /* Vertically center the content */
+}
+
+h1 {
+    margin: auto;
+    text-align: center;
+}
+h2 {
+    clear: both;
+    margin: auto;
+    text-align: center;
+}
+
+.code{
+	font-family: monospace;
+	background:#222;
+	white-space: pre;
+	color:#fdb;
+	padding:8px;
+	display:block;
+}
+
+
+.p8 {
+    padding:40px 80px;
+}

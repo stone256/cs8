@@ -1,0 +1,19 @@
+{
+    "name": "xs/ii",
+    "description": "Useless Framework.",
+    "keywords": [
+        "framework",
+        "XS-II"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.0.2",
+        "guzzlehttp/guzzle": "^7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "modules\\": "modules/",
+            "Scripts\\": "scripts/"
+        }
+    }
+}

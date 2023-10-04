@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @author peter wang <stone256@hotmail.com>
+ * @copyright MIT
+ * project cli enter point
+ *  e.g. $php x2cli.php /mytest/show/info
+ */
+
+// DIRECTORY_SEPARATOR force window into the correct way 
+define('DS', '/');	
+if(!defined('PHP_EOL')) define('PHP_EOL', "\n");
+
+include  'config' . DS . '.console.php';
+
+define('_X_CONSOLE', true);
+
+$_SERVER['REDIRECT_URL'] = $_SERVER['REQUEST_URI'] = $argv[1];
+parse_str(implode('&', array_slice($argv, 2)), $_REQUEST);
+
+
+$_SERVER['REQUEST_TIME'] = time();
+$_SERVER['REQUEST_TIME_FLOAT'] = microtime(true);
+
+include "index.php";

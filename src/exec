@@ -1,0 +1,12 @@
+<?php
+
+define('_X_CLI_CALL', true);
+
+$_SERVER['REQUEST_URI'] = str_replace('//', '/', '/' . $argv[1]);
+array_shift($argv);
+array_shift($argv);
+while (count($argv)) {
+    $v = explode('=', array_shift($argv));
+    $_REQUEST[$v[0]] = $v[1];
+}
+include 'public/index.php';

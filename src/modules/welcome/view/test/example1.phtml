@@ -1,0 +1,28 @@
+<?php include _X_LAYOUT . '/welcome/header.phtml'; ?>
+<div class="main">
+    <h1>Welcome CS8</h1>
+</div>
+<h2>Example1 - route with prefix, post and pre processor </h2>
+<div class="p8">
+    <p>
+        <button onclick="history.go(-1)"> &langle; back</button>
+    </p>
+    <b>.route.php</b>
+    <p class="code">
+        &lt;php
+        use Scripts\Test\Test;
+        
+
+        //      [ '[url]'         => '[class] @ [method/action] | [route name]']
+        routing(['test/:id/user/:user' => 'welcome/test@example1|welcome.example1'])
+        // url prefix
+        ->prefix('welcome')
+        //pre-processor
+        ->before(['welcome_model@cors', [Test::class, 'show']])
+        //post processor
+        ->after(['welcome_model@json']);
+
+
+    </p>
+</div>
+<?php include _X_LAYOUT . '/welcome/footer.phtml'; ?>

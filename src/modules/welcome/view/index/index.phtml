@@ -1,0 +1,18 @@
+<?php include _X_LAYOUT . '/welcome/header.phtml'; ?>
+<div class="main">
+    <h1>Welcome CS8</h1>
+
+
+</div>
+<div class="p8">
+    <ul>
+        <li>
+            <a href="<?= _routes('welcome.example1', ['id' => 2, 'user' => 88]); ?>"> example 1 : router - full </a>
+        </li>
+        <li>
+            <a href="<?= _routes('welcome.example2', ['id' => 100, 'user' => 1009]); ?>"> example 2 : router - simple</a>
+        </li>
+
+    </ul>
+</div>
+<?php include _X_LAYOUT . '/welcome/footer.phtml'; ?>
