@@ -1,16 +1,16 @@
-<?php include _X_LAYOUT . '/welcome/header.phtml'; ?>
+<?php include _X_LAYOUT . '/welcome/header.phtml';?>
 <div class="main">
     <h1>Welcome CS8</h1>
 </div>
 <h2>Example2 - simple</h2>
 <div class="p8">
     <p>
-        <button onclick="history.go(-1)"> &langle;  back</button>
+        <button onclick="history.go(-1)"> &langle; back</button>
     </p>
     <b>.route.php</b>
     <p class="code">
         &lt;php
-        
+
 
         use modules\welcome\exampleController;
 
@@ -20,5 +20,19 @@
         ->prefix('welcome');
 
     </p>
+
+    <pre>
+
+        <b>examples/post/:id</b> is the url-path, ':id' in the url-path is to pass in the as id
+
+        the  http://[xxxx.xxx.xxx]/welcome/examples/post/123
+
+        will pass in <i>id = 123</i>
+    <h3>
+        You can change the number in url
+        and give a try
+        id = <?=$data['id'];?></h3>
+    </pre>
+
 </div>
-<?php include _X_LAYOUT . '/welcome/footer.phtml'; ?>
+<?php include _X_LAYOUT . '/welcome/footer.phtml';?>

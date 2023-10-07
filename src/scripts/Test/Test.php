@@ -11,7 +11,6 @@ class Test
     }
     function show()
     {
-        _request('after', 'show');
-        return ['return from before handle 2'=>__FILE__];
+        return ['before handle2 add' => "file =>" . str_replace(_X_ROOT, '', __FILE__)];
     }
 }

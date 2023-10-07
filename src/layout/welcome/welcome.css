@@ -41,3 +41,6 @@ h2 {
 .p8 {
     padding:40px 80px;
 }
+dt {
+    font-weight: 800;
+}

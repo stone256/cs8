@@ -1,11 +1,12 @@
 <?php
 
- 
 class welcome_testController extends _system_controller
 {
-    function example1()
+    public function example1()
     {
         $q = _request();
-        return ['data'=>$q];
+        $received = "id={$q['id']} user={$q['user']}";
+        $q['controller method:example1()  add'] = $received;
+        return ['data' => $q];
     }
 }

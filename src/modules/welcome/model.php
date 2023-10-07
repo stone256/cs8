@@ -2,15 +2,13 @@
 class welcome_model
 {
 
-    function cors()
+    public function cors()
     {
-        _request('before', 'cors');
-        return ['return from before handle'=>__DIR__];
+        return ['before handle1 add' => "file =>" . str_replace(_X_ROOT, '', __FILE__)];
     }
 
-    function json()
+    public function json()
     {
-        _request('after', 'json');
-        return ['return from after handle' => __FUNCTION__]; 
+        return ['after handle add' => "file =>" . str_replace(_X_ROOT, '', __FILE__)];
     }
 }
