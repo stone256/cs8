@@ -12,8 +12,7 @@
     },
     "autoload": {
         "psr-4": {
-            "modules\\": "modules/",
-            "Scripts\\": "scripts/"
+            "modules\\": "modules/"
         }
     }
 }

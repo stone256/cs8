@@ -210,7 +210,8 @@ class xpAS
             return $arr;
         $crr = array();
         foreach ($arr as $k => $v)
-            $crr[$k] = $v; foreach ($brr as $k => $v)
+            $crr[$k] = $v;
+        foreach ($brr as $k => $v)
             if ($onDuplicated && isset($crr[$k])) {
                 $crr[$onDuplicated . '_' . $k] = $v;
             } else {
@@ -487,7 +488,7 @@ class xpAS
      * setting value to an  array,
      * note this one call by refs!!!
      */
-    static function set(array &$arr, mixed $irr, $value, $dm = null, $level = 50, $current = 0): mixed
+    static function set(&$arr, mixed $irr, $value, $dm = null, $level = 50, $current = 0): mixed
     {
         $dm = $dm ?? self::$dm;
         if ($level == $current)
@@ -731,7 +732,7 @@ class xpAS
      */
     static function de_quote(string $str, string $keep = ""): string
     {
-        $q = array("''" => '^\'.*\'$', '""' => '^\".*\"$', '()' => '^\(.*\)$', );
+        $q = array("''" => '^\'.*\'$', '""' => '^\".*\"$', '()' => '^\(.*\)$',);
         unset($q[$keep]);
         $q = '/' . implode('|', $q) . '/';
         //if(preg_match('/^\'.*\'$|^\".*\"$|^\(.*\)$/',$str)){
@@ -802,7 +803,6 @@ class xpAS
     {
         // Encrypt the data using OpenSSL's AES-256-CBC encryption
         return openssl_encrypt($str, $cipher, $key, 0, $iv);
-
     }
     /**
      * decode a string
@@ -879,7 +879,7 @@ class xpAS
      */
     static function test(mixed $a): array
     {
-        $t = array('value' => "'$a'", 'isset' => isset($a) ? 'y' : 'n', 'empty' => empty($a) ? 'y' : 'n', 'is_null' => is_null($a) ? 'y' : 'n', '$a?' => $a ? 'y' : 'n', '$a===false' => $a === false ? 'y' : 'n', '$a==""' => $a == "" ? 'y' : 'n', '$a===""' => $a === "" ? 'y' : 'n', '$a==0' => $a == 0 ? 'y' : 'n', '$a===0' => $a === 0 ? 'y' : 'n', );
+        $t = array('value' => "'$a'", 'isset' => isset($a) ? 'y' : 'n', 'empty' => empty($a) ? 'y' : 'n', 'is_null' => is_null($a) ? 'y' : 'n', '$a?' => $a ? 'y' : 'n', '$a===false' => $a === false ? 'y' : 'n', '$a==""' => $a == "" ? 'y' : 'n', '$a===""' => $a === "" ? 'y' : 'n', '$a==0' => $a == 0 ? 'y' : 'n', '$a===0' => $a === 0 ? 'y' : 'n',);
         return $t;
     }
     /**

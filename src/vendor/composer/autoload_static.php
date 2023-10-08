@@ -17,10 +17,6 @@ class ComposerStaticInitb6bd1532af5a51bdcd56629a1be107c3
         array (
             'modules\\' => 8,
         ),
-        'S' => 
-        array (
-            'Scripts\\' => 8,
-        ),
         'P' => 
         array (
             'Psr\\Http\\Message\\' => 17,
@@ -38,10 +34,6 @@ class ComposerStaticInitb6bd1532af5a51bdcd56629a1be107c3
         'modules\\' => 
         array (
             0 => __DIR__ . '/../..' . '/modules',
-        ),
-        'Scripts\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/scripts',
         ),
         'Psr\\Http\\Message\\' => 
         array (

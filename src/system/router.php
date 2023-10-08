@@ -82,6 +82,11 @@ class Router
         $routes = is_array($routes) ? $routes : [$routes];
         $last_data = [];
         foreach ($routes as $k => $v) {
+            if ($k == 'session()') {
+                session_start();
+                $_SESSION['__start__'] = _time();
+                continue;
+            }
             $route = str_replace('//', '/', "/$k");
             $controller = $this->parse_controller($v);
             $last_data[$route] = self::$routes[$route] = [
@@ -94,8 +99,6 @@ class Router
         self::$last_data = $last_data;
         return $this;
     }
-
-
 
     //apply to last data group
     public function prefix($pre)
@@ -122,7 +125,8 @@ class Router
         if (!is_array($model))
             $model = [$model];
         foreach ($model as $k => $v)
-            $model[$k] = $this->parse_model($v); foreach (self::$last_data as $k => $v) {
+            $model[$k] = $this->parse_model($v);
+        foreach (self::$last_data as $k => $v) {
             self::$routes[$k]['before'] = $model;
         }
         return $this;
@@ -136,7 +140,8 @@ class Router
         if (!is_array($model))
             $controllers = [$model];
         foreach ($model as $k => $v)
-            $model[$k] = $this->parse_model($v); foreach (self::$last_data as $k => $v) {
+            $model[$k] = $this->parse_model($v);
+        foreach (self::$last_data as $k => $v) {
             self::$routes[$k]['after'] = $model;
         }
         return $this;
