@@ -1,0 +1,39 @@
+<?php include _X_LAYOUT . '/welcome/header.phtml';?>
+<div class="main">
+    <h1>Welcome CS8</h1>
+</div>
+<h2>Example3 - console commands</h2>
+<div class="p8">
+    <p>
+        <a href="<?=_routes('welcome');?>"> &langle; back</a>
+    </p>
+    <p class="code">
+
+        ## install a modules from zip file
+        #php exec 'welcome/module/install' data/tmp/dummy.zip
+
+        ## uninstall module (* module name must match the folder name and enabled config file name)
+        #php exec 'welcome/module/uninstall' dummy
+    </p>
+    <pre>
+        <h3>explains</h3>
+        - run under src folder
+        php exec '/welcome/examples/3' 'a=1' 'product' 'category' 'b=2'.... 
+                    |
+        routes:-----+                       |
+                                            |
+        all parameters: --------------------+
+
+
+        the contains of _request()  would be
+        [
+            'a' => 1,
+            0 => product,
+            1 => category,
+            'b' => 2
+        ]
+
+    </pre>
+
+</div>
+<?php include _X_LAYOUT . '/welcome/footer.phtml';?>
