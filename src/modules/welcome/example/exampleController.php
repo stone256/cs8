@@ -16,4 +16,11 @@ class exampleController extends \_system_controller
         // by return array with data field to start view
         return ['data' => _request()];
     }
+
+    public function example4()
+    {
+        $file = _factory('welcome_example_model_one')->show();
+        // by return array with data field to start view
+        return ['data' => ['file' => $file]];
+    }
 }

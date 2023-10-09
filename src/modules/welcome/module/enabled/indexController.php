@@ -39,6 +39,7 @@ class welcome_module_enabled_indexController extends _system_controller
             include $f;
             if (in_array($module, $modules)) {
                 unlink($f);
+                break;
             }
         }
         xpAS::go(_routes('welcome.modules.list'));

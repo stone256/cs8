@@ -104,7 +104,7 @@ function _request(mixed $selector = false, $value = null): mixed
 //static function _factory($name, $no_singleton = false, $construct_data=null){
 function _factory()
 {
-    global $overwrites;
+    $overwrites = app::$overwrites;
     static $objects = array();
     $args = func_get_args();
     $name = array_shift($args);

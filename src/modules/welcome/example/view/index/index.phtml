@@ -7,18 +7,22 @@
 <div class="p8">
     <ul>
         <li>
-            <a href="<?=_routes('welcome.example1', ['id' => 2, 'user' => 88]);?>"> example 1 : router - full </a>
+            <a href="<?=_routes('welcome.example1', ['id' => 2, 'user' => 88]);?>"> example 1 : routing - full </a>
         </li>
         <li>
-            <a href="<?=_routes('welcome.example2', ['id' => 100, 'user' => 1009]);?>"> example 2 : router -
+            <a href="<?=_routes('welcome.example2', ['id' => 100, 'user' => 1009]);?>"> example 2 : routing -
                 simple</a>
         </li>
         <li>
             <a href="<?=_routes('welcome.example3');?>"> example 3 : console commands</a>
         </li>
         <li>
-            <a href="<?=_routes('welcome.modules.list');?>"> example 4 : modules list, enable, and disable</a>
+            <a href="<?=_routes('welcome.modules.list');?>"> example : modules list, enable, and disable</a>
         </li>
+        <li>
+            <a href="<?=_routes('welcome.example4');?>"> example 4 : standard model over-write</a>
+        </li>
+
     </ul>
 </div>
 <?php include _X_LAYOUT . '/welcome/footer.phtml';?>
