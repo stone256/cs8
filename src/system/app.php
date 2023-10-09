@@ -8,28 +8,49 @@
  * framework x application class
  *
  */
+
+// standard app constants 
 require_once __DIR__ . '/define.php';
-require_once _X_CONFIG . '/general.php';
-//loading local setting
+
+// loading local setting
 include_once _X_CONFIG . '/.local.php';
-//set loader for system files and modules libraries
+
+//set loader for app files and modules libraries
 include_once(__DIR__ . '/loader.php');
+// app helper
 include_once(__DIR__ . '/helper.php');
+// load in logger class
 include_once(__DIR__ . '/logger.php');
+// default controller (template)
 include_once(__DIR__ . '/controller.php');
+// routing class
 include_once(__DIR__ . '/router.php');
 
+// error handle (default)
+include_once(_X_CONFIG . '/error-handler.php');
 
+/**
+ * main app
+ */
 class App
 {
-
+    // all routes
     static $routes = [];
+
+    // all modules
     static $modules = [];
+
+    // over-wrote models
     static $overwrites = [];
+
+    // start or update scripts
     static $update_scripts = [];
+
+    // current uri
     static $uri = '';
 
-    static $data;
+    //static $data;
+
     function __construct()
     {
 
@@ -56,9 +77,9 @@ class App
             include $v;
         }
         self::$overwrites = $overwrites;
-
     }
 
+    // start app
     public function run()
     {
         //finding match route,
@@ -83,28 +104,28 @@ class App
             3            0      0     0    output as json string
             4            0      x     1    use view
             5            0      1     0    use default view
-        */
+         */
 
         switch (true) {
-            // 1
+                // 1
             case is_scalar($result ?? false):
                 echo $result;
                 exit;
-            // 2 || 3    
+                // 2 || 3    
             case ($result['status'] ?? false) || (!($result['data'] ?? false) && !($result['view'] ?? false)):
                 echo json_encode($result, JSON_PRETTY_PRINT);
                 exit;
-            // 4 
+                // 4 
             case $result['data'] ?? false:
-                $ctrlr =  $route['controller']['path'] ?? str_replace('\\', '/', _X_ROOT. '/'. $route['controller']['class']);
-                $view = preg_replace('/controller(\.php)?$/i', '', $ctrlr);
+                $ctrl =  $route['controller']['path'] ?? str_replace('\\', '/', _X_ROOT . '/' . $route['controller']['class']);
+                $view = preg_replace('/controller(\.php)?$/i', '', $ctrl);
                 $view = preg_replace('/([^\/]+)$/', "view/$1/{$route['controller']['action']}.phtml", $view);
                 break;
-            //5
+                //5
             case $result['view'] ?? false:
                 $view = str_replace('//', '/', _X_MODULE . '/' . $result['view']);
                 break;
-            // otherwise not view     
+                // otherwise not view     
             default:
                 $view = false;
         }
@@ -126,9 +147,7 @@ class App
         }
     }
 
-    /**
-     * running target scripts
-     */
+    // running target scripts
     function _run_target($target)
     {
         $type = $target['type'];
@@ -149,30 +168,26 @@ class App
         }
     }
 
+    // finding route by requested url
     function _get_route()
     {
         $_u = preg_split('/\/+/', str_replace(_X_URL_OFFSET, '', self::$uri));
         while (count($_u)) {
             $_p = str_replace('//', '/', '/' . implode('/', $_u));
-            if ($this->routes[$_p])
-                return array($_p, $this->routes[$_p]);
+            if (self::$routes[$_p])
+                return array($_p, self::$routes[$_p]);
             array_pop($_u);
         }
         $this->_goto_404("missing controller: route mapping");
     }
 
+    // get current url
     function _get_url()
     {
-        // $u = $_SERVER['REQUEST_URI'];
-        // $u = str_replace(_X_OFFSET, '', $u);
-        // //in case of none encode http:// [ // ] - preg_quote, does not quote / -
-        // $q = preg_quote($_SERVER['QUERY_STRING'] ?? '');
-        // $q = str_replace('/', chr(92) . '/', $q);
-        // $u = preg_replace('/\?' . $q . '$/', '', $u);
-        // $u = STR_REPLACE(_X_OFFSET, '', $u);
         return self::$uri = _X_PATH;
     }
 
+    // hit 404 error
     function _goto_404($v)
     {
         $missing = $v;

@@ -92,9 +92,11 @@ function _request(mixed $selector = false, $value = null): mixed
             $decodedData = @json_decode($jsonString, true);
         }
         $decodedData = $decodedData ?? [];
-        // merge with post and get
-        $data = [...$decodedData, ...$_REQUEST];
+        // merge with post and get and trim them
+        $data = xpAS::trim([...$decodedData, ...$_REQUEST]);
+        $data['__start__'] = microtime(1);
     }
+
     return $selector ? xpAS::get($data, $selector) : $data;
 }
 
@@ -168,6 +170,32 @@ function _module()
     sort($list['inactive']);
 
     return $list;
+}
+
+// http header auth
+function _auth($username = null, $password = null)
+{
+    // by pass if it's console call
+    if (_X_CLI_CALL === true) return true;
+
+    $username = $username ?? _X_SUPER_USER;
+    $password = $password ?? _X_SUPER_PASSWORD;
+
+    // Get the username and password from the HTTP request
+    $providedUsername = $_SERVER['PHP_AUTH_USER'] ?? '';
+    $providedPassword = $_SERVER['PHP_AUTH_PW'] ?? '';
+
+    // Check if the provided username and password match the expected values
+    if ($providedUsername === $username && $providedPassword === $password) {
+        // Authentication successful
+        return true;
+    } else {
+        // Authentication failed
+        header('WWW-Authenticate: Basic realm="Authentication Required"');
+        header('HTTP/1.0 401 Unauthorized');
+        echo 'Authentication failed.';
+        exit;
+    }
 }
 
 

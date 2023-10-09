@@ -6,10 +6,11 @@
  */
 class logger
 {
-    // max 1MB
-    static $max = 1000000;
     //keep for 14 days
     static $keep_for = 14;
+
+    // only check old file once every xxx times;
+    static $check_per_circle = 1000;
 
     static function log(mixed $data, $path = null)
     {
@@ -25,18 +26,8 @@ class logger
         fwrite($file, "\n" . date("Y-m-d H:i:s :") . (is_scalar($data) ? $data : var_export($data, 1)));
         fclose($file);
 
-        //check oversize
-        $size = filesize($filename);
-        if ($size > _X_LOG_MAX_SIZE ?? self::$max) {
-            $diff = $size - (_X_LOG_MAX_SIZE ?? self::$max);
-            $con = file_get_contents($filename);
-            $con = substr($con, $diff);
-            file_put_contents($filename, $con);
-        }
-
-
         //clear old log
-        if ($files = glob($path . '/*.txt')) {
+        if (!mt_rand(0, (_X_LOG_CHECK_PER_CIRCLE_SIZE ?? self::$check_per_circle)) && $files = glob($path . '/*.txt')) {
             //get cut off date
             $date = new DateTime();
             $days = _X_LOG_KEEP_FOR ?? self::$keep_for;
@@ -45,13 +36,12 @@ class logger
 
             foreach ($files as $file) {
                 $file_date = xpAS::preg_get($file, '/(\d\d\d\d\-\d\d\-\d\d)\.txt$/ims', 1);
-                if($file_date < $cut_off_date) {
+                if ($file_date < $cut_off_date) {
                     unlink($file);
                 }
             }
         }
     }
-
 }
 function _log(mixed $data, $path = null)
 {

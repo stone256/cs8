@@ -1,7 +1,8 @@
 <?php
 
-use modules\welcome\example\exampleController;
-use modules\welcome\scripts\Test\Test;
+
+// protecting route after project started
+_auth();
 
 // simple routing
 routing([
@@ -14,8 +15,9 @@ routing([
 routing([
     'test/:id/user/:user' => 'welcome/example/test@example1|welcome.example1',
 ])->prefix('welcome')
-    ->before(['welcome_example_model@cors', [Test::class, 'show']])
+    //using standard model or class type
+    ->before(['welcome_example_model@cors', [modules\welcome\scripts\Test\Test::class, 'show']])
     ->after(['welcome_example_model@json']);
 
 // use class type
-routing(['/welcome/examples/post/:id' => [exampleController::class, 'example2', 'welcome.example2']]);
+routing(['/welcome/examples/post/:id' => [modules\welcome\example\exampleController::class, 'example2', 'welcome.example2']]);

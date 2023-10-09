@@ -11,6 +11,17 @@
 //load framework
 require_once(__DIR__ . '/../system/app.php');
 
-$app = new App();
 
+
+
+//try {
+_log('started');
+$app = new App();
 $app->run();
+// } catch (Exception $e) {
+//     _log($e->getMessage());
+//     exit;
+// } catch (ErrorException $e) {
+//     _log($e->getMessage());
+//     exit;
+// }

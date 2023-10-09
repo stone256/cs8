@@ -6,7 +6,17 @@ $_SERVER['REQUEST_URI'] = str_replace('//', '/', '/' . $argv[1]);
 array_shift($argv);
 array_shift($argv);
 while (count($argv)) {
-    $v = explode('=', array_shift($argv));
-    $_REQUEST[$v[0]] = $v[1];
+    $param = array_shift($argv);
+    $json = @json_decode($param, 1);
+    if ($json) {
+        $_REQUEST = [...$_REQUEST, ...$json];
+        continue;
+    }
+    if (!preg_match('/^[^\"]+\=/ims', $param)) {
+        $_REQUEST[] = $param;
+    } else {
+        $v = explode('=', $param);
+        $_REQUEST[$v[0]] = $v[1];
+    }
 }
 include 'public/index.php';

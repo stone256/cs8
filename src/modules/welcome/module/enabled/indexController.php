@@ -4,7 +4,7 @@ class welcome_module_enabled_indexController extends _system_controller
 {
 
     protected $system =  [
-        //    '/welcome/example',
+        '/welcome/example',
         '/welcome/module/enabled',
         '/welcome/module/disabled',
     ];
@@ -12,7 +12,6 @@ class welcome_module_enabled_indexController extends _system_controller
     public function list()
     {
         $modules = _module();
-
         $modules['example only'] = $this->system;
         $modules['_csrf'] = _csrf();
         return ['data' => $modules];
@@ -43,6 +42,18 @@ class welcome_module_enabled_indexController extends _system_controller
             }
         }
         xpAS::go(_routes('welcome.modules.list'));
+    }
+
+
+    // this is console cmd
+    function install()
+    {
+        $q = _request();
+
+        $m = 90;
+        _d($p);
+        dd($q);
+        return;
     }
 
     protected function _check()
