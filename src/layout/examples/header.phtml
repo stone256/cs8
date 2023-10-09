@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title><?=$page_title;?></title>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<meta name="robots" content="noindex"><!-- not for admin -->
@@ -11,9 +12,9 @@
 
 	<base href="<?=_X_URL;?>/" class="base">
 	<script>
-		var _PUBLIC='<?=_X_URL_PUBLIC;?>';
-		var _BASE='<?=_X_URL;?>';
-		var _URL='<?=_r_url();?>';
+		var _PUBLIC = '<?=_X_URL_PUBLIC;?>';
+		var _BASE = '<?=_X_URL;?>';
+		var _URL = '<?=_r_url();?>';
 	</script>
 
 	<meta property="og:image" content="public/media/image/admin.jpg" />
@@ -36,4 +37,5 @@
 	<script src="public/package/common/common.js"></script>
 
 </head>
-<body id="page-top" class="admin <?=$page_name?>  <?=_alter($page_title);?>" >
+
+<body id="page-top" class="admin <?=$page_name?>  <?=$page_title;?>">

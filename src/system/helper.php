@@ -58,7 +58,7 @@ function _csrf(bool | string  $token = false): bool | string
 
 
 // get or set routes
-function _routes(string $name, array $data = []): string
+function _routes(string $name, array $data = [], $relative = false): string
 {
     // for cache all routes handle
     static $names;
@@ -73,7 +73,7 @@ function _routes(string $name, array $data = []): string
         $regex = '/\:' . preg_quote($k) . '((?=\/)|$)/ims';
         $uri = preg_replace($regex, $v, $uri);
     }
-    return _X_URL . $uri;
+    return ($relative ? '' : _X_URL) . $uri;
 }
 
 // get or set request data. selector: "product,name" ...
@@ -137,12 +137,6 @@ function _config($name, $value = null)
     xpAS::set($cnf, $name, $value);
     global $config;
     xpAS::set($config, $name, $value);
-}
-
-// convert space to under score so it can be used as variable name
-function _alter($str, $from = ' ', $to = '_')
-{
-    return str_replace($from, $to, $str);
 }
 
 // return all modules path

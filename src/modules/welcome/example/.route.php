@@ -20,4 +20,15 @@ routing([
     ->after(['welcome_example_model@json']);
 
 // use class type
-routing(['/welcome/examples/post/:id' => [modules\welcome\example\exampleController::class, 'example2', 'welcome.example2']]);
+routing([
+    '/welcome/examples/post/:id' => [
+        modules\welcome\example\exampleController::class,
+        'example2',
+        'welcome.example2'
+    ],
+    '/welcome/examples/3' => [
+        modules\welcome\example\exampleController::class,
+        'example3',
+        'welcome.example3'
+    ]
+]);

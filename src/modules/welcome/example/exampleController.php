@@ -7,7 +7,13 @@ class exampleController extends \_system_controller
 {
     public function example2()
     {
-        $q = _request();
-        return ['data' => $q];
+        // by return array with data field to start view
+        return ['data' => _request()];
+    }
+
+    public function example3()
+    {
+        // by return array with data field to start view
+        return ['data' => _request()];
     }
 }
