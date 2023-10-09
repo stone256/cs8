@@ -176,7 +176,7 @@ function _module()
 function _auth($username = null, $password = null)
 {
     // by pass if it's console call
-    if (_X_CLI_CALL === true) return true;
+    if (defined('_X_CLI_CALL')) return true;
 
     $username = $username ?? _X_SUPER_USER;
     $password = $password ?? _X_SUPER_PASSWORD;

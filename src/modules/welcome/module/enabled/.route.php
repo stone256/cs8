@@ -13,5 +13,5 @@ routing([
     '/enable' => 'welcome/module/enabled/index@enable|welcome.modules.enable',
 
     '/install' => 'welcome/module/enabled/index@install|welcome.modules.install',
-    '/uninstall' => 'welcome/module/enabled/index@install|welcome.modules.uninstall',
+    '/uninstall' => 'welcome/module/enabled/index@uninstall|welcome.modules.uninstall',
 ])->prefix('/welcome/modules');

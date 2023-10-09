@@ -2,7 +2,7 @@
 
 error_reporting(E_ALL & ~E_NOTICE);
 
-
+/** handle errors */
 set_error_handler(
     function ($errno, $errstr, $errfile, $errline) {
         $msg[] = "Caught error: " . $errno;
@@ -13,6 +13,7 @@ set_error_handler(
     }
 );
 
+/** handle exceptions */
 set_exception_handler(
     function ($exception) {
         $msg[] = "Caught exception: " . $exception->getCode();

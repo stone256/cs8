@@ -56,6 +56,33 @@ class welcome_module_enabled_indexController extends _system_controller
         return;
     }
 
+    // this is console cmd
+    function uninstall()
+    {
+        $q = _request();
+        $module = preg_replace('/[^a-z0-9_]/ims', '', $q[0]);
+
+        $folder = _X_MODULE . '/' . $module;
+
+        if (!is_dir($folder)) {
+            die("module not found!");
+        }
+
+        $file = _X_TMP . "/{$module}.zip";
+
+        $cmd = "zip -r $file $folder";
+        $r = exec($cmd);
+
+        if (preg_match('/error\:/ims', $r)) {
+            $msg =  $r;
+        } else {
+            $msg = 'zip: ' . str_replace(_X_ROOT . '/', '', $file);
+            $cmd = "rm -r $folder";
+            exec($cmd);
+        }
+        die($msg . "\n\n");
+    }
+
     protected function _check()
     {
         $q = _request();
