@@ -49,10 +49,46 @@ class welcome_module_enabled_indexController extends _system_controller
     function install()
     {
         $q = _request();
+        $zip = preg_replace('/[^a-z0-9_\/\.]/ims', '', $q[0]);
 
-        $m = 90;
-        _d($p);
-        dd($q);
+        // locate zip file
+        if (!preg_match('/^(\/|http)/ims', $zip)) {
+            // relative path
+            $path = _X_ROOT . '/' . $zip;
+            $zip = realpath($path);
+        }
+
+        if (!preg_match('/\.zip$/ims', $zip)) {
+            die("\nMust be .zip file\n\n");
+        }
+
+        $file = str_replace('.zip', '', basename($zip));
+
+        if (file_exists(_X_MODULE . '/' . $file)) {
+            die("\nModule already existed\n\n");
+        }
+
+        $id = uniqid();
+        //create tmp folder 
+        $tmp = _X_TMP . '/' . $id;
+        $cmd = "mkdir -pm 0775 $tmp";
+        exec($cmd);
+
+        chdir($tmp);
+        $cmd = "unzip $zip";
+        exec($cmd);
+
+        // find module folder
+        $cmd = "find $tmp -iname $file";
+        $rs = exec($cmd);
+
+        $cmd = "mv $rs " . _X_MODULE;
+        $rs = exec($cmd);
+
+        $cmd = "rm -r $tmp";
+        $rs = exec($cmd);
+
+        die("\n$file installed,. please enabled it to use\n\n");
         return;
     }
 
@@ -78,7 +114,7 @@ class welcome_module_enabled_indexController extends _system_controller
         } else {
             $msg = 'zip: ' . str_replace(_X_ROOT . '/', '', $file);
             $cmd = "rm -r $folder";
-            exec($cmd);
+            $msg .= "\n" . exec($cmd);
         }
         die($msg . "\n\n");
     }

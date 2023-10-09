@@ -12,6 +12,8 @@ src/public/storage
 src/data/*.key
 src/data/log
 src/data/tmp
+!src/data/tmp/dummy.zip
+script.pl
 src/data/cache
 src/data/batch
 
