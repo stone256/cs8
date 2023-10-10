@@ -23,4 +23,8 @@ class exampleController extends \_system_controller
         // by return array with data field to start view
         return ['data' => ['file' => $file]];
     }
+    public function example5()
+    {
+        return ['data' =>  _request()];
+    }
 }

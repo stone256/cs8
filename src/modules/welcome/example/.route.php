@@ -35,5 +35,10 @@ routing([
         modules\welcome\example\exampleController::class,
         'example4',
         'welcome.example4'
+    ],
+    '/welcome/examples/5' => [
+        modules\welcome\example\exampleController::class,
+        'example5',
+        'welcome.example5'
     ]
 ]);

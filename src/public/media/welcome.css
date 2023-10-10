@@ -49,3 +49,15 @@ dt {
 .hide {
     display:none
 }
+
+
+.structure {
+    color:cadetblue;
+}
+.folder {
+    background:yellowgreen;
+    color:linen
+}
+.file {
+    color:darkslategrey;
+}

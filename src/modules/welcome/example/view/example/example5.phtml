@@ -1,0 +1,50 @@
+<?php include _X_LAYOUT . '/welcome/header.phtml';?>
+<div class="main">
+    <h1>Welcome CS8</h1>
+</div>
+<h2>Example5 - folder structure</h2>
+<div class="p8">
+    <p>
+        &langle; <a href="<?=_routes('welcome');?>"> back</a>
+    </p>
+    <pre class="structure">
+ <span class="folder">[src]</span>&#9472;&#9472;&#9488;
+        &#9500;&#9472;&#9472;&#9472;<span class="folder">[config]</span> # config and setting
+        &#9474;   
+        &#9500;&#9472;&#9472;&#9472;<span class="folder">[data]</span> # stored static data 
+        &#9474;   
+        &#9500;&#9472;&#9472;&#9472;<span class="folder">[layout]</span> # project common html structure files
+        &#9474;   
+        &#9500;&#9472;&#9472;&#9472;<span class="folder">[modules]</span> # coding space
+        &#9474;      &#9474;
+        &#9474;      &#9500;&#9472;&#9472;&#9472;.<span class="file">route.php</span> # routing info
+        &#9474;      &#9500;&#9472;&#9472;&#9472;<span class="file">indexController.php</span> # controller file 
+        &#9474;      &#9500;&#9472;&#9472;&#9472;<span class="folder">[view]</span>
+        &#9474;      &#9474;      &#9493;&#9472;&#9472;&#9472;<span class="folder">[index]</span> # store view file for indexController hence "index" ==> "indexController"
+        &#9474;      &#9474;             &#9493;&#9472;&#9472;&#9472;<span class="file">xxx.phtml</span> # view file for "xxx()" method in indexController. must end with phtml instead html
+        &#9474;      &#9500;&#9472;&#9472;&#9472;<span class="file">my_model.php</span> # model file
+        &#9474;      &#9500;&#9472;&#9472;&#9472;<span class="folder">[models]</span> # store all model files under here if you like
+        &#9474;      &#9474;      &#9493; <span class="file">model2.php</span> # you can put model file whatever you want
+        &#9474;      &#9500;&#9472;&#9472;&#9472;<span class="file">.setup.1.0.0.0.php.done</span> # start/update script that have been run 
+        &#9474;      &#9493;&#9472;&#9472;&#9472;<span class="file">.setup.1.0.0.1.php</span> # script will be run when app called
+        &#9474;
+        &#9500;&#9472;&#9472;&#9472;<span class="folder">[public]</span> # web document root: all static data here: js, css, image, uploads(for public view) .....
+        &#9474;
+        &#9500;&#9472;&#9472;&#9472;<span class="folder">[system]</span> # system folders contains: app, helper, logger, defined constants
+        &#9474;
+        &#9500;&#9472;&#9472;&#9472;<span class="folder">[vendor]</span> # 3rd party modules( use psr12 loader)
+        &#9474;
+        &#9500;&#9472;&#9472;&#9472;<span class="file">composer.json</span> # contains loader and modules
+        &#9474;
+        &#9500;&#9472;&#9472;&#9472;<span class="file">exec</span> # a php file to handle console call ( $php exec [router] [param1] [param2] ...)
+        &#9474;
+        &#9493;&#9472;&#9472;&#9472;<span class="file">README.md</span> # read me file
+      
+
+
+        
+    
+    </pre>
+
+</div>
+<?php include _X_LAYOUT . '/welcome/footer.phtml';?>
