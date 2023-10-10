@@ -1,0 +1,42 @@
+<?php include _X_LAYOUT . '/welcome/header.phtml';?>
+<div class="main">
+    <h1>Welcome CS8</h1>
+</div>
+<h2>Example4 - model(standard) over-write</h2>
+<div class="p8">
+    <p>
+        &langle; <a href="<?=_routes('welcome');?>"> back</a>
+    </p>
+    <i>file:example_one_2_two.php under the folder <b>config/overwrite/</b></i>
+    <p class="code">
+
+        &lt?php
+        //overwrite only apply when use _factory(Model-Name)
+        $overwrites['welcome_example_model_one']='welcome_example_model_two' ;
+    </p>
+
+    <i>When use</i>
+    <p class="code">
+
+        &lt??php
+        ...
+        ...
+        public function
+        example4() {
+        $file=_factory('welcome_example_model_one')->show();
+        // by return array with data field to start view
+        return ['data' => ['file' => $file]];
+        }
+
+    </p>
+
+    <pre>
+        <p>
+            result shows file => "<?=$data['file'];?>"
+        </p>
+
+    
+    </pre>
+
+</div>
+<?php include _X_LAYOUT . '/welcome/footer.phtml';?>

@@ -1,0 +1,3 @@
+<?php
+
+$modules[] = '/welcome/example';
