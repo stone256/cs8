@@ -1,7 +1,7 @@
 html {
     height: 100%;
     background: aquamarine;
-    font-family:cursive
+    font-family: system-ui, monospace;
 }
 
 body {
@@ -55,9 +55,19 @@ dt {
     color:cadetblue;
 }
 .folder {
-    background:yellowgreen;
-    color:linen
+    background:goldenrod;
+    color:darkgreen
 }
 .file {
     color:darkslategrey;
+}
+
+.error {
+    color: red;
+    font-weight:900;
+}
+
+dt {
+    font-weight:900;
+    font-size: 1.02em;
 }

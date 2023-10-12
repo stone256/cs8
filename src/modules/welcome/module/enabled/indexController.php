@@ -3,30 +3,31 @@
 class welcome_module_enabled_indexController extends _system_controller
 {
 
+    function __construct()
+    {
+        parent::__construct();
+
+        //since all method in the class are for console only
+        $this->is_console();
+    }
+
     protected $system =  [
         '/welcome/example',
         '/welcome/module/enabled',
         '/welcome/module/disabled',
     ];
 
-    public function list()
-    {
-        $modules = _module();
-        $modules['example only'] = $this->system;
-        $modules['_csrf'] = _csrf();
-        return ['data' => $modules];
-    }
-
     public function enable()
     {
         $module = $this->_check();
 
-        $con = "<?php \n\n\n \$modules[] = '{$module}';\n\n";
-
         $path = _X_MODULE_ENABLED . '/' . preg_replace('/^\-/', '', str_replace('/', '-', $module)) . '.php';
+        if (file_exists($path)) {
+            die("\nHave a module in same name or already enabled\n\n");
+        }
+        $con = "<?php \n\n\n \$modules[] = '{$module}';\n\n";
         file_put_contents($path, $con);
-
-        xpAS::go(_routes('welcome.modules.list'));
+        die("\nModule: $module enabled\n\n");
     }
 
     public function disable()
@@ -34,21 +35,25 @@ class welcome_module_enabled_indexController extends _system_controller
         $module = $this->_check();
 
         $path = _X_MODULE_ENABLED . '/*.php';
+
+
         $files = glob($path);
         foreach ($files  as $f) {
             include $f;
             if (in_array($module, $modules)) {
                 unlink($f);
-                break;
+                die("\nModule: $module disabled\n\n");
             }
         }
-        xpAS::go(_routes('welcome.modules.list'));
+        die("\nModule already disabled\n\n");
     }
 
 
     // this is console cmd
     function install()
     {
+        $this->is_console();
+
         $q = _request();
         $zip = preg_replace('/[^a-z0-9_\/\.]/ims', '', $q[0]);
 
@@ -96,8 +101,7 @@ class welcome_module_enabled_indexController extends _system_controller
     // this is console cmd
     function uninstall()
     {
-        $q = _request();
-        $module = preg_replace('/[^a-z0-9_]/ims', '', $q[0]);
+        $module = $this->_check();
 
         $folder = _X_MODULE . '/' . $module;
 
@@ -123,15 +127,13 @@ class welcome_module_enabled_indexController extends _system_controller
     protected function _check()
     {
         $q = _request();
+        $module = preg_replace('/[^a-z0-9_\/]/ims', '', $q[0]);
 
-        if (!_csrf($q['_csrf'])) {
-            die("Session time out. you lazy bone!");
-        }
-        $module = $q['m'];
         $modules = _module();
         if (in_array($module, $this->system)) {
             die("Immutable!");
         }
+
         if (!in_array($module, $modules['all'])) {
             die("Module not found");
         }

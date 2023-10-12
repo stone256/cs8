@@ -40,5 +40,44 @@ routing([
         modules\welcome\example\exampleController::class,
         'example5',
         'welcome.example5'
-    ]
+    ],
+
+    '/welcome/examples/6' => [
+        modules\welcome\example\exampleController::class,
+        'example6',
+        'welcome.example6'
+    ],
+    '/welcome/examples/7' => [
+        modules\welcome\example\exampleController::class,
+        'example7',
+        'welcome.example7'
+    ],
+    '/welcome/examples/8' => [
+        modules\welcome\example\exampleController::class,
+        'example8',
+        'welcome.example8'
+    ],
+
+    '/welcome/examples/9' => [
+        modules\welcome\example\exampleController::class,
+        'example9',
+        'welcome.example9'
+    ],
+
+    '/welcome/examples/console-command' => [
+        modules\welcome\example\exampleController::class,
+        'console_command',
+        'welcome.example.console-command'
+    ],
+    '/welcome/examples/module-install' => [
+        modules\welcome\example\exampleController::class,
+        'module_install',
+        'welcome.example.module_install'
+    ],
+    '/welcome/examples/module-uninstall' => [
+        modules\welcome\example\exampleController::class,
+        'module_uninstall',
+        'welcome.example.module-uninstall'
+    ],
+
 ]);

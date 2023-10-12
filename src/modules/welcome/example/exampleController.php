@@ -5,6 +5,32 @@ namespace modules\welcome\example;
 class exampleController extends \_system_controller
 
 {
+    public function example9()
+    {
+        return ['data' => _request()];
+    }
+
+    public function example8()
+    {
+        return ['data' => _module()];
+    }
+
+    public function example7()
+    {
+        return ['data' => _request()];
+    }
+
+    public function example6()
+    {
+        return ['data' => _request()];
+    }
+
+    public function console_command()
+    {
+        $this->is_console();
+        return _request();
+    }
+
     public function example2()
     {
         // by return array with data field to start view

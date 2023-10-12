@@ -101,7 +101,7 @@ function _request(mixed $selector = false, $value = null): mixed
 }
 
 // must defined according to cs8 model template
-//static function _factory($name, $no_singleton = false, $construct_data=null){
+//static function _factory($name,  $construct_data=null){
 function _factory()
 {
     $overwrites = app::$overwrites;
@@ -112,13 +112,7 @@ function _factory()
         $name = $overwrites[$name];
     }
 
-    $no_singleton = array_shift($args);
-    if (!$no_singleton && $objects ?? false && $objects[$name] ?? false) {
-        return $objects[$name];
-    }
-
     $r = new ReflectionClass($name);
-
     return $objects[$name] = $r->newInstanceArgs(($args[0] ?? []));
 }
 

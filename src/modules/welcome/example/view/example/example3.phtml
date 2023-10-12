@@ -2,36 +2,54 @@
 <div class="main">
     <h1>Welcome CS8</h1>
 </div>
-<h2>Example3 - console commands</h2>
+<h2>Example - console commands</h2>
 <div class="p8">
     <p>
         &langle; <a href="<?=_routes('welcome');?>"> back</a>
     </p>
     <p class="code">
 
-        ## install a modules from zip file
-        #php exec 'welcome/module/install' data/tmp/dummy.zip
+        ## command line
+        #php exec /welcome/examples/console-command a=1 b=2 userId=8 product category
 
-        ## uninstall module (* module name must match the folder name and enabled config file name)
-        #php exec 'welcome/module/uninstall' dummy
     </p>
     <pre>
         <h3>explains</h3>
         - run under src folder
-        php exec '/welcome/examples/3' 'a=1' 'product' 'category' 'b=2'.... 
-                    |
-        routes:-----+                       |
-                                            |
-        all parameters: --------------------+
-
+        #php exec /welcome/examples/console-command a=1 b=2 userId=8 product category
+                        |                                       V 
+        route:----------+                                       |
+                                                                |
+        all parameters: ----------------------------------------+
 
         the contains of _request()  would be
-        [
-            'a' => 1,
-            0 => product,
-            1 => category,
-            'b' => 2
-        ]
+        {
+            "a": "1",
+            "b": "2",
+            "useId": "8",
+            "0": "product",
+            "1": "category",
+            "__start__": 1697083173.723353
+        }
+
+        __start__ = start time: microtime(1);
+
+        - A parameter specified with '=' will be interpreted as a key=>value pair, 
+        - While a parameter without '=' will be treated as a numeric index in a continuous sequence.
+
+
+        When executed in a web browser at the URL http://cs8.mx21/welcome/examples/console-command?a=1&b=2&0=code&mx=yes&1=debug 
+        the following message is displayed:
+
+        <b class="error">Unauthorized: Access to the resource is denied.</b>
+
+        this is because in the controller have:
+        <p class="code">
+            public function console_command()
+            {
+                <i>i$this->is_console();</i>
+    
+        </p>
 
     </pre>
 
