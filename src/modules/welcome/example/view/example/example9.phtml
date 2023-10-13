@@ -1,0 +1,71 @@
+<?php include _X_LAYOUT . '/welcome/header.phtml';?>
+<div class="main">
+    <h1>Welcome CS8</h1>
+</div>
+<h2>Example - helper functions</h2>
+<div class="p8">
+    <p>
+        &langle; <a href="<?=_routes('welcome');?>"> back</a>
+    </p>
+    <dl>
+        <dt>
+            _auth($username = null, $password = null): bool
+        </dt>
+        <dd>header authentication<br>
+            $username = $username ?? _X_SUPER_USER;
+            $password = $password ?? _X_SUPER_PASSWORD;
+            against $_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'];
+        </dd>
+        <dt>
+            _config($name, $value = null): mix
+        </dt>
+        <dd>get(if value == null) or set config value (if $value presented) <br>(global $config)</dd>
+        <dt>_csrf(bool | string $token = false): bool | string
+        </dt>
+        <dd>create (if pass in false) or check csrf token (if pass in string)</dd>
+        <dt>
+            dd($x)
+        </dt>
+        <dd>output debug info and die</dd>
+        <dt>
+            _d($x, $die = false, $display = true, $tab = 6, $deep = 50, $level = 0)
+        </dt>
+        <dd>output debug info, die if 2nd value passed in (!= false) </dd>
+        <dt>
+            _factory(): class object
+        </dt>
+        <dd>create singleton model (standard model)<br>
+            _factory($name, $constructor_data1= ,$constructor_data2=......)
+            <br>
+            $user = _factory('admin_user_model')->get(['id'=>12]);
+        </dd>
+        <dt>
+            _module(): array
+        </dt>
+        <dd>get all modules: return array like:
+            <pre>
+            [
+                [all] => [  [1] => /welcome/example, [2] => /welcome/module/activeTest... ]
+                [active] =>[  [1] => /welcome/example... ]
+                [inactive] =>[  [0] => /welcome/module/activeTest... ]
+            ]
+            </pre>
+        </dd>
+        <dt>
+            _request(mixed $selector = false, $value = null): mixed
+        </dt>
+        <dd>set or get user request value:<br>
+            post,get, json body, url embedded ('/test/:id/:category')..
+        </dd>
+        <dt>
+            _routes(string $name, array $data = [], $relative = false): string
+        </dt>
+        <dd>make url, and return either full url or just path without domain if $relative=true</dd>
+        <dt>
+            _time(): float
+        </dt>
+        <dd>return the time different from script started in microtime(true) </dd>
+    </dl>
+
+</div>
+<?php include _X_LAYOUT . '/welcome/footer.phtml';?>

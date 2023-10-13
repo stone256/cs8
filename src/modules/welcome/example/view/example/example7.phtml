@@ -1,0 +1,34 @@
+<?php include _X_LAYOUT . '/welcome/header.phtml';?>
+<div class="main">
+    <h1>Welcome CS8</h1>
+</div>
+<h2>Example - module enable, disable</h2>
+<div class="p8">
+    <p>
+        &langle; <a href="<?=_routes('welcome');?>"> back</a>
+    </p>
+    <p class="code">
+
+        ## enabled a module
+        #php exec /welcome/module/enable /welcome/module/activeTest
+
+
+        ## disable a module
+        #php exec /welcome/module/disable /welcome/module/activeTest
+
+
+    </p>
+    <pre>
+        <h3>explains</h3>
+        when you enable/disable a module, you must input the root folder of the module.
+        e.g. /welcome/module/activeTest
+
+        either you get Module: /welcome/module/activeTest enabled/disabled, or you will get some error message,
+        such as:   
+        <span class="error">Module already disabled</span>
+        <span class="error">Module already enabled</span>
+        ...
+    </pre>
+
+</div>
+<?php include _X_LAYOUT . '/welcome/footer.phtml';?>

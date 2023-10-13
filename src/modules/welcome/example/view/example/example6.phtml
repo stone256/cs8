@@ -1,0 +1,32 @@
+<?php include _X_LAYOUT . '/welcome/header.phtml';?>
+<div class="main">
+    <h1>Welcome CS8</h1>
+</div>
+<h2>Example - console commands</h2>
+<div class="p8">
+    <p>
+        &langle; <a href="<?=_routes('welcome');?>"> back</a>
+    </p>
+    <p class="code">
+
+        ## install a modules from zip file
+        #php exec /welcome/module/install data/tmp/dummy.zip
+
+        ## uninstall module (* module name must match the folder name and enabled config file name)
+        #php exec /welcome/module/uninstall dummy
+    </p>
+    <pre>
+        <h3>explains</h3>
+        When installing or uninstalling a module, it is essential for the module's name to correspond with the folder name located 
+        directly under the primary "modules" folder.
+
+        During the un-installation process, the folder will be compressed into a zip file with the same name as the folder itself. This zip file will then be placed within the "data/tmp/" directory. 
+        Subsequently, the folder will be deleted.
+        
+        Once the installation is complete, remember to enable the module.
+
+        ** note: this method can only install module under the "modules" folder!!! 
+    </pre>
+
+</div>
+<?php include _X_LAYOUT . '/welcome/footer.phtml';?>
