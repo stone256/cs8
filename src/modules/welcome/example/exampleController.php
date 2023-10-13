@@ -5,6 +5,13 @@ namespace modules\welcome\example;
 class exampleController extends \_system_controller
 
 {
+    public function samples()
+    {
+        $id = _request('id');
+
+        return ['view' => "welcome/example/view/sample-{$id}.phtml", 'data' => _request()];
+    }
+
     public function example9()
     {
         return ['data' => _request()];

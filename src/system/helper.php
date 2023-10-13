@@ -101,7 +101,7 @@ function _request(mixed $selector = false, $value = null): mixed
 }
 
 // must defined according to cs8 model template
-//static function _factory($name,  $construct_data=null){
+//static function _factory($name, $construct_data=null){
 function _factory()
 {
     $overwrites = app::$overwrites;

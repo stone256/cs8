@@ -64,6 +64,12 @@ routing([
         'welcome.example9'
     ],
 
+    '/welcome/sample/:id' => [
+        modules\welcome\example\exampleController::class,
+        'samples',
+        'welcome.sample'
+    ],
+
     '/welcome/examples/console-command' => [
         modules\welcome\example\exampleController::class,
         'console_command',

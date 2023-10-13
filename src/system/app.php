@@ -102,11 +102,15 @@ class App
             1 result=scalar     -     -    direct out put
             2            1      x     x    output as json string
             3            0      0     0    output as json string
-            4            0      x     1    use view
-            5            0      1     0    use default view
+            4            0      x     1    use default view
+            5            0      1     0    use customer view path
          */
 
         switch (true) {
+                //5 as long gave view
+            case $result['view'] ?? false:
+                $view = str_replace('//', '/', _X_MODULE . '/' . $result['view']);
+                break;
                 // 1
             case is_scalar($result ?? false):
                 echo $result;
@@ -121,10 +125,7 @@ class App
                 $view = preg_replace('/controller(\.php)?$/i', '', $ctrl);
                 $view = preg_replace('/([^\/]+)$/', "view/$1/{$route['controller']['action']}.phtml", $view);
                 break;
-                //5
-            case $result['view'] ?? false:
-                $view = str_replace('//', '/', _X_MODULE . '/' . $result['view']);
-                break;
+
                 // otherwise not view     
             default:
                 $view = false;
