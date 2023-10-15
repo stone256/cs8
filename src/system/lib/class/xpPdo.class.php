@@ -20,25 +20,25 @@ class xpPdo
 
     public $last_query;
 
-    static function conn($cfg = null)
+    static function conn($config = null)
     {
-        $c = self::get_default_config($cfg);
+        $c = self::get_default_config($config);
         $id = self::connection_id($c);
         if (!(self::$connections[$id] ?? false))
             self::$connections[$id] = new xpPDO($c, $id);
         return self::$connections[$id];
     }
     /**
-     * get cfg in default way
+     * get config in default way
      *
-     * @param array $cfg
+     * @param array $config
      * @return array of  database settings
      */
-    static function get_default_config($cfg = null)
+    static function get_default_config($config = null)
     {
-        if (!$cfg)
-            global $cfg;
-        return $c = $cfg['db'];
+        if (!$config)
+            global $config;
+        return $c = $config['db'];
     }
     static function connection_id($c)
     {
@@ -46,7 +46,7 @@ class xpPdo
     }
     function __construct($c, $id = null)
     {
-        $params['cfg'] = $c;
+        $params['config'] = $c;
         $params['id'] = $id ?? self::connection_id($c);
         $params['host'] = $c['host'];
         $params['user'] = $c['user'];
@@ -207,7 +207,6 @@ class xpPdo
     {
         $id = md5($sql);
         $this->statement[$id] = $this->statement[$id] ?? $this->pdo->prepare($sql, $option);
-        _d($data);
         $result = $this->statement[$id]->execute($data);
         if ($result) {
             return $this->statement[$id]->fetchAll(PDO::FETCH_ASSOC);
@@ -536,16 +535,8 @@ class xpPdo
 
     protected function _log($q)
     {
-        $this->last_query = $q;
-        if ($this->params['log']['path']) {
-            $file = $this->params['log']['path'] . '/' . $this->params["database"] . ".log";
-            $log = file_get_contents($file);
-            $entry = date('Y_m_d__H_i_s_u') . ": " . $q;
-            $log .= "\n{$entry}";
-            if (strlen($log) > $this->params['log']['size'])
-                $log = substr($log, -$this->params['log']['size']);
-            file_put_contents($file, $log);
-        }
+        if (!function_exists('_log')) return;
+        _log($q, '/mysql/');
     }
 
     /**

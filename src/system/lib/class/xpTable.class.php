@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author  peter wang <xpw365@gmail.com>
  * @version  1.23
@@ -7,7 +8,8 @@
  * stantard xp table: key field : id auto incremantal
  */
 /*start class */
-class xpTable {
+class xpTable
+{
     //loaded tables
     //	static $tables = array();
     static $handles = array();
@@ -20,23 +22,25 @@ class xpTable {
      * object handler
      *
      * @param string $name	:  table name
-     * @param boolean $new	:  reload cfg,
+     * @param boolean $new	:  reload config,
      * @return object handler
      */
-    static function load($name, $cfg = false) {
-        if (!$cfg) global $cfg;
-        $hash = md5(json_encode($cfg['db']));
+    static function load($name, $config = false)
+    {
+        if (!$config) global $config;
+        $hash = md5(json_encode($config['db']));
         if (self::$handles[$hash][$name] ?? false) return self::$handles[$hash][$name];
-        return self::$handles[$hash][$name] = new self($name, $cfg);
+        return self::$handles[$hash][$name] = new self($name, $config);
     }
     /**
      * create table name
      *
      * @param string $name	: table name
      */
-    function __construct($name, $cfg = null) {
+    function __construct($name, $config = null)
+    {
         $this->table = $name;
-        $this->db = xpPdo::conn($cfg);
+        $this->db = xpPdo::conn($config);
         $r = $this->db->table_info($name);
         $this->field_names = $this->db->table_fields($name);
         $this->key = $this->db->table_key($name);
@@ -45,15 +49,17 @@ class xpTable {
     /**
      * relay all other call to xpPdo
      */
-    function __call($name, $args) {
+    function __call($name, $args)
+    {
         array_unshift($args, $this->table);
-        dd($args);
         return call_user_func_array(array($this->db, $name), $args);
     }
-    function q($q) {
+    function q($q)
+    {
         return $this->db->q($q);
     }
-    function check($value, $field = null) {
+    function check($value, $field = null)
+    {
         if (!$field) $field = $this->key ? $this->key : $this->field_names[0];
         return $this->get(array($field => $value));
     }
@@ -61,7 +67,8 @@ class xpTable {
      * list
      *  status, limit , orders, search
      */
-    function paged($arr = false, $query = false, $count_query = false) {
+    function paged($arr = false, $query = false, $count_query = false)
+    {
         /**
          * $arr =array(
          * table=>table name

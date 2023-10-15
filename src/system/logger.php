@@ -17,7 +17,7 @@ class logger
         static $fp = array();
 
         $path = $path ?? _X_LOG;
-        $path = _X_ROOT . str_replace(_X_ROOT, '', $path);
+        $path = _X_LOG . str_replace(_X_LOG, '', $path);
         //log stored daily
         $filename = $path . "/log-" . date("Y-m-d") . ".txt";
         $filename = str_replace('//', '/', $filename);
