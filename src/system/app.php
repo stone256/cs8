@@ -107,7 +107,7 @@ class App
          */
 
         switch (true) {
-                //5 as long gave view
+                //5 as long gave view path
             case $result['view'] ?? false:
                 $view = str_replace('//', '/', _X_MODULE . '/' . $result['view']);
                 break;
@@ -116,10 +116,10 @@ class App
                 echo $result;
                 exit;
                 // 2 || 3    
-            case ($result['status'] ?? false) || (!($result['data'] ?? false) && !($result['view'] ?? false)):
+            case ($result['status'] ?? false):
                 echo json_encode($result, JSON_PRETTY_PRINT);
                 exit;
-                // 4 
+                // 4 default view
             case $result['data'] ?? false:
                 $ctrl =  $route['controller']['path'] ?? str_replace('\\', '/', _X_ROOT . '/' . $route['controller']['class']);
                 $view = preg_replace('/controller(\.php)?$/i', '', $ctrl);

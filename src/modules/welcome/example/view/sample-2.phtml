@@ -1,0 +1,75 @@
+<?php include _X_LAYOUT . '/welcome/header.phtml';?>
+<div class="main">
+    <h1>Welcome CS8</h1>
+</div>
+<h2>Example - Where do I find/put view file</h2>
+<div class="p8">
+    <p>
+        &langle; <a href="<?=_routes('welcome');?>"> back</a>
+    </p>
+    <p>
+        system calls controller after analyze the requests path:<br>
+        $result = $this->call_controller(....);<br>
+        <br>
+        when controller returns array of data ("$result") to system, system try to do few things:
+    <ol>
+        <li>
+            if the array contains "view", system will treat that as the related path to _X_MODULE,<br>
+            and try to find view file( _X_MODULE . $result["view"] ).<br>
+            e.g.
+            <pre class="code">
+                public function samples()
+                {
+                    return ['view' => "welcome/example/view/sample-1.phtml", 'data' => _request('id')];
+                }
+            </pre>
+        </li>
+        <li>
+            if the array contains "view", system will treat that as the related path to _X_MODULE,<br>
+            and try to find view file( _X_MODULE . $result["view"] ).<br>
+            <br>
+            if "result" contains "data", then system will try to find view in default location:<br>
+            e.g. module: "dummy"
+            <br>
+            <p class="code">
+                routing(['/dummy' => 'dummy/index@index']);
+            </p>
+
+            <pre class="code">
+                class dummy_indexController extends _system_controller
+                {
+                    public function index()
+                    {
+                        $hash = _factory('dummy_model')->name();
+
+                        return ['data' => ['hash' => $hash]];
+                    }
+                ....
+                }
+            </pre>
+
+            system will looking default view file here:
+            <h3> modules/[<i>module-name</i>]/view/[<i>controller-class-name</i>]/[<i>method-name</i>].phtml</h3>
+
+            so for above example, that is "<i>modules/<b>dummy</b>/view/<b>index</b>/<b>index</b>.phtml</i>"<br>
+
+        </li>
+        <li>
+            if "$result" contains neither "view" nor "data",
+            system will do
+            <p class="code">
+                die(json_encode($result, JSON_PRETTY_PRINT));
+            </p>
+        </li>
+        <li>
+            if "$result" is not array or object,
+            system will do
+            <p class="code">
+                echo $result; exit;
+            </p>
+        </li>
+
+    </ol>
+    </p>
+</div>
+<?php include _X_LAYOUT . '/welcome/footer.phtml';?>
