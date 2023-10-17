@@ -4,19 +4,38 @@
  * @name 	: local config
  * @author 	: peter<stone256@hotmail.com>
  *
- *  this is the place you put all your settings concern the server locally (DEV TESTING .. LIVE).
+ *  place your private, or server relate settings here.
+ *  .local.pgp is include in git-ignore
  */
+
 define('__X_SERVER__', 'DEV');
 
+/** logs */
 
-// max 0.1MB
-define('_X_LOG_MAX_SIZE', 100000);
-//14 days
+// keep for 14 days
 define('_X_LOG_KEEP_FOR', 100);
+// only try to clean old log every xxxx circles
+define('_X_LOG_CHECK_PER_CIRCLE_SIZE', 4000);
 
 // used for access example .. after project started
 define('_X_SUPER_USER', 'WHATEVER');
 define('_X_SUPER_PASSWORD', 'WHATEVER');
+
+
+ini_set('display_errors', 1);
+
+date_default_timezone_set('Australia/NSW');
+
+ini_set("session.gc_maxlifetime", 2592000);
+ini_set('session.cookie_lifetime', 0);
+
+ini_set('post_max_size', '2M');
+ini_set('upload_max_filesize', '2M');
+
+define('PROJECT_NAME', 'XS-II'); //compact system of xs
+
+define('_X_404_PAGE', _X_ROOT . '/layout/_404.phtml');
+
 
 
 /**  * /

@@ -9,7 +9,7 @@ set_error_handler(
         $msg[] = str_replace(_X_ROOT, '', $errfile) . " : " . $errline;
         $msg[] = $errstr;
         _log(implode("\n", $msg));
-        die("Error\n");
+        die("Error - please check log\n");
     }
 );
 
@@ -21,6 +21,6 @@ set_exception_handler(
         $msg[] =  $exception->getMessage();
         $msg[] =  $exception->getPrevious();
         _log(implode("\n", $msg));
-        die("Error\n");
+        die("Error - please check log\n");
     }
 );

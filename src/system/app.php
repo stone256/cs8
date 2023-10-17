@@ -107,6 +107,9 @@ class App
          */
 
         switch (true) {
+            case _X_CLI_CALL === true:
+                echo is_scalar($result ?? false) ? $result : json_encode($result, JSON_PRETTY_PRINT);
+                exit;
                 //5 as long gave view path
             case $result['view'] ?? false:
                 $view = str_replace('//', '/', _X_MODULE . '/' . $result['view']);
@@ -192,6 +195,7 @@ class App
     function _goto_404($v)
     {
         $missing = $v;
+        if (_X_CLI_CALL === true) die("\n" . $v . "\n\n");
         include _X_404_PAGE !== '_X_404_PAGE' ? _X_404_PAGE : _X_LAYOUT . DS . '_404.phtml';
         die();
     }

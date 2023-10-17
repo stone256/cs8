@@ -8,32 +8,34 @@
         &langle; <a href="<?=_routes('welcome');?>"> back</a>
     </p>
     <ol>
-        <li>start by one of following method
+        <li>Start the application using one of the following methods:
             <ol>
-                <li>cli: $php exec "route" param1 param2....</li>
-                <li>http call to the "route"</li>
+                <li>Command Line Interface (CLI): <span class="code">$php exec "route" param1 param2....</span></li>
+                <li>HTTP call to the "route"</li>
             </ol>
         </li>
-        <li>system init at "public/index.php"</li>
-        <li>load main app
+        <li>Initialize the system at "public/index.php."</li>
+        <li>Load the main application by <span class="code">$app = new App();</span>
             <ol>
-                <li>load define.php</li>
-                <li>load .local.php (local setting)</li>
-                <li>load system file: helper, logger, router, controller.. </li>
-                <li>local all routes from enabled modules
+                <li>Load "define.php."</li>
+                <li>Load ".local.php" (local settings).</li>
+                <li>Load system files: helper, logger, router, controller, etc.</li>
+                <li>Load local routes from enabled modules:
                     <ol>
-                        <li>check if there are setup file(such as setup.0.0.0.1.php, ".0.0.0.1" is the version number)
+                        <li>Check if there are setup files (e.g., setup.0.0.0.1.php, where ".0.0.0.1" is the version
+                            number).
                         </li>
-                        <li>run the files once according to version's order and rename them as setup.0.0.0.1.php.done
+                        <li>Run the setup files once according to the version's order and rename them as
+                            setup.0.0.0.1.php.done.
                         </li>
                     </ol>
                 </li>
-                <li>load models overwrites from "config/overwrite/" folder</li>
-                <li>find the controller by routes</li>
-                <li>prepare _request() data</li>
-                <li>call controller</li>
-                <li>*controller may call models to prepare the data - optional</li>
-                <li>return data or call view file according to controller's return</li>
+                <li> Load model overwrites from the "config/overwrite/" folder.</li>
+                <li>Find the controller based on the defined routes(all .route.php in enabled modules).</li>
+                <li>Prepare the data using the _request() function.</li>
+                <li>Call the controller.</li>
+                <li>Optionally, the controller may call models to prepare data.</li>
+                <li>Return data or call a view file based on the controller's return.</li>
             </ol>
         </li>
     </ol>

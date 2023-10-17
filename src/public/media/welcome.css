@@ -1,7 +1,11 @@
 html {
     height: 100%;
-    background: aquamarine;
-    font-family: system-ui, monospace;
+    background: whitesmoke;
+    font-family: Arial, sans-serif;
+    font-size:15px;
+    font-weight:400;
+    line-height: 1.9em; 
+    color: #464846;
 }
 
 body {
@@ -34,8 +38,9 @@ h2 {
 	background:#222;
 	white-space: pre;
 	color:#fdb;
-	padding:8px;
+	padding:5px;
 	display:block;
+    line-height:1.2em;
 }
 
 
@@ -49,7 +54,6 @@ dt {
 .hide {
     display:none
 }
-
 
 .structure {
     color:cadetblue;
@@ -71,3 +75,33 @@ dt {
     font-weight:900;
     font-size: 1.02em;
 }
+
+.structure {
+    line-height:1em;
+}
+
+
+.some-page-wrapper {
+    margin: 15px;
+  }
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+  }
+  
+  .blue-column {
+  }
+  
+  .green-column {
+  }
+  

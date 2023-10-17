@@ -2,7 +2,7 @@
 
 define('_X_CLI_CALL', true);
 
-$_SERVER['REQUEST_URI'] = str_replace('//', '/', '/' . $argv[1]);
+$_SERVER['REQUEST_URI'] = str_replace('//', '/', '/' . ($argv[1] ?? ''));
 array_shift($argv);
 array_shift($argv);
 while (count($argv)) {
