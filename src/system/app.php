@@ -109,6 +109,7 @@ class App
         switch (true) {
             case _X_CLI_CALL === true:
                 echo is_scalar($result ?? false) ? $result : json_encode($result, JSON_PRETTY_PRINT);
+                echo "\n";
                 exit;
                 //5 as long gave view path
             case $result['view'] ?? false:
@@ -196,7 +197,7 @@ class App
     {
         $missing = $v;
         if (_X_CLI_CALL === true) die("\n" . $v . "\n\n");
-        include _X_404_PAGE !== '_X_404_PAGE' ? _X_404_PAGE : _X_LAYOUT . DS . '_404.phtml';
+        require_once _X_404_PAGE;
         die();
     }
 }

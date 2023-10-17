@@ -865,15 +865,7 @@ class xpAS
         }
         return $p;
     }
-    /**
-     * start session
-     */
-    static function session_start($new_id = false)
-    {
-        if ($new_id)
-            session_regenerate_id();
-        session_start();
-    }
+
     /**
      * test a var status
      */

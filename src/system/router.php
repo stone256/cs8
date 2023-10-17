@@ -83,6 +83,7 @@ class Router
         $last_data = [];
         foreach ($routes as $k => $v) {
             if ($k == 'session()') {
+                if (session_status() === PHP_SESSION_ACTIVE) continue;
                 session_start();
                 $_SESSION['__start__'] = _time();
                 continue;
@@ -178,9 +179,7 @@ class Router
                 'name' => $controller[2] ?? uniqid()
             ];
         } else {
-
             $controller = str_replace('//', '/', "/$controller");
-
             // welcome/test@example1|welcome.example1
             preg_match('/^(.*?)(\|([^\|].*?))?$/ims', $controller, $ctrl);
 

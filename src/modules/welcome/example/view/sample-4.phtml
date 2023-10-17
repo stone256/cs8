@@ -1,0 +1,35 @@
+<?php include _X_LAYOUT . '/welcome/header.phtml';?>
+<div class="main">
+    <h1>Welcome CS8</h1>
+</div>
+<h2>Use system logging:</h2>
+<div class="p8">
+    <p>
+        &langle; <a href="<?=_routes('welcome');?>"> back</a>
+    </p>
+    <pre>
+        The system provided a help function called _log();
+ 
+        <b>_log(mixed $data, $path = null)|: void</b>
+        <p class="code">
+            $payload = ...
+            $response = HTTP::get($url, $payload);
+             _log($payload);
+             _log($response);
+        </p>
+
+        log file is in _X_LOG( /data/log) with date stamp as file name, e.g. 2023-10-04.txt
+
+        if path provided, the file will be in _X_LOG. "/$path/2023-10-01.txt";
+
+        * note:
+        log setting related defines in .local.php 
+        <p class="code">
+            # how many days system will keep those log.
+            define('_X_LOG_KEEP_FOR', 10);
+            # only try to clean old log every xxxx calls/runs
+            define('_X_LOG_CHECK_PER_CIRCLE_SIZE', 4000); 
+        </p>
+    </pre>
+</div>
+<?php include _X_LAYOUT . '/welcome/footer.phtml';?>

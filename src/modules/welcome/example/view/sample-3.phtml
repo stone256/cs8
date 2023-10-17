@@ -1,0 +1,20 @@
+<?php include _X_LAYOUT . '/welcome/header.phtml';?>
+<div class="main">
+    <h1>Welcome CS8</h1>
+</div>
+<h2>Example - use of standard model file:</h2>
+<div class="p8">
+    <p>
+        &langle; <a href="<?=_routes('welcome');?>"> back</a>
+    </p>
+    <pre>
+        The system provided a help function called _factory();
+        by input the model name, it will return the singleton instance of the model class:
+        
+        <b>_factory($name, $constructor_data1= ,$constructor_data2=......): class object</b>
+        <p class="code">
+            $hash = _factory('dummy_model')->name();
+        </p>
+    </pre>
+</div>
+<?php include _X_LAYOUT . '/welcome/footer.phtml';?>
