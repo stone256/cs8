@@ -1,0 +1,42 @@
+<?php include _X_LAYOUT . '/welcome/header.phtml';?>
+<div class="main">
+    <h1>Welcome CS8</h1>
+</div>
+<h2>Example - simple</h2>
+<div class="p8">
+    <p>
+        &langle; <a href="<?=_routes('welcome');?>"> back</a>
+    </p>
+    <b>modules/simple/.route.php</b>
+    <p class="code">
+        &lt;php
+
+        // type string [ "url" => "module-path-to-class/controller-name@handle-method|route name"]
+        routing(['simple/articles/:id' => "simple/index@articles|simple.article"]);
+        ## the controller-name worked as: "simple/product@find" refers to "function find(){}" in
+        "module/simple/productController.php"
+    </p>
+
+    <b>modules/simple/productController.php</b>
+    <p class="code">
+        &lt;php
+
+        #class simple_productController extends _system_default
+        class simple_productController
+    </p>
+
+    <pre>
+        <b>* If</b> you use simple string type routing, the controller class name must follows
+        the name must include the path in it. e.g. 
+        "welcome/en/lang@translate" the class name should be:<span class="code">
+            class welcome_en_langController {
+                public function translate() {
+                    ...
+                }
+                ...
+            }
+        </span>
+    </pre>
+
+</div>
+<?php include _X_LAYOUT . '/welcome/footer.phtml';?>

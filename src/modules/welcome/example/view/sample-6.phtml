@@ -1,0 +1,90 @@
+<?php include _X_LAYOUT . '/welcome/header.phtml';?>
+<div class="main">
+    <h1>Welcome CS8</h1>
+</div>
+<h2>Example - Hello World</h2>
+<div class="p8">
+    <p>
+        &langle; <a href="<?=_routes('welcome');?>"> back</a>
+    </p>
+    <p>
+    <ol>
+        <li>
+            under folder "modules", create folder "helloworld"
+            <span class="code">
+                # from project cloned git folder
+                $ cd src
+                $ mkdir helloworld
+            </span>
+        </li>
+        <li>
+            under folder "modules/helloworld" create two files:
+            <p class="code">
+                .route.php
+                indexController.php
+            </p>
+        </li>
+        <li>
+            for .route.php
+            <p class="code">
+                &lt;?php
+
+                routing([
+                '/hello/world/:name' => 'helloworld/index@say_hello',
+                ]);
+
+            </p>
+        </li>
+        <li>
+            for indexController.php
+            <pre class="code">
+                &lt;?php
+
+                class helloworld_indexController extends _system_controller {
+                    function say_hello() {
+                        $name = _request('name');
+                        return 'Hello ' . ucwords($name ?: 'anonymous');
+                    }
+                }
+
+            </pre>
+        </li>
+        <li>Now, enable modules
+            <p class="code">
+                $ php exec console/module-enable helloworld
+                Module: /helloworld enabled
+            </p>
+        </li>
+        <li>
+            Try in console
+            <p class="code">
+                # goto src folder
+                $ cd src
+
+                # run console command
+                $ php exec hello/world/peter
+                Hello Peter
+
+                $ php exec hello/world/
+                Hello Anonymous
+            </p>
+        </li>
+        <li>
+            Run in browser
+            if you not yet have server setup. you can try this:
+            <p class="code">
+                # goto to public, assume you already in src folder
+                $ cd public
+                $ php -S 0.0.0.0:8888
+
+            </p>
+            now goto to your browser
+            type "http://loccalhost:8888/hello/world/john"
+            <span class="code">Hello John</span>
+        </li>
+    </ol>
+
+    </p>
+
+</div>
+<?php include _X_LAYOUT . '/welcome/footer.phtml';?>

@@ -2,7 +2,7 @@
 <div class="main">
     <h1>Welcome CS8</h1>
 </div>
-<h2>Example - simple</h2>
+<h2>Routing and Controller</h2>
 <div class="p8">
     <p>
         &langle; <a href="<?=_routes('welcome');?>"> back</a>
@@ -14,11 +14,13 @@
 
         use modules\welcome\example\exampleController;
 
-        // [ '[url]' => [ [class], [method/action], [route name]']
-        routing(['examples/post/:id' => [exampleController::class, 'example2', 'welcome.example2']])
-        // url prefix
-        ->prefix('welcome');
+        // type class [ "url" => [ "class", "handle-method", "route name"]
+        routing(['examples/post/:id' => [exampleController::class, 'example2', 'welcome.example2']]);
 
+        // type string [ "url" => "module-path-to-class/controller-name@handle-method|route name"]
+        routing(['simple/articles/:id' => "simple/index@articles|simple.article"]);
+        ## the controller-name worked as:
+        ## "simple/product@find" refers to "function find(){}" in "modules/simple/productController.php"
     </p>
 
     <pre>
@@ -34,6 +36,9 @@
 
         current <i class="error">id = <?=$data['id'];?></i>
     </h3>
+
+
+
     </pre>
 
 </div>

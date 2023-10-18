@@ -33,6 +33,7 @@ h2 {
     text-align: center;
 }
 
+
 .code{
 	font-family: monospace;
 	background:#222;
@@ -43,7 +44,10 @@ h2 {
     line-height:1.2em;
 }
 
-
+.b {
+    font-weight: 800;
+    color:#000;
+}
 .p8 {
     padding:40px 80px;
 }
@@ -97,11 +101,5 @@ dt {
     flex-direction: column;
     flex-basis: 100%;
     flex: 1;
-  }
-  
-  .blue-column {
-  }
-  
-  .green-column {
   }
   

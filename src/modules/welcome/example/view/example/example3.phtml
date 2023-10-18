@@ -8,19 +8,17 @@
         &langle; <a href="<?=_routes('welcome');?>"> back</a>
     </p>
     <p class="code">
-
         ## command line
-        $ php exec /welcome/examples/console-command a=1 b=2 userId=8 product category
-
+        $ php exec /welcome/examples/console a=1 b=2 userId=8 product category
     </p>
-    <pre>
+    <pre class="structure">
         <h3>explains</h3>
         - run under src folder
-        $ php exec /welcome/examples/console-command a=1 b=2 userId=8 product category
-                        |                                       V 
-        route:----------+                                       |
-                                                                |
-        all parameters: ----------------------------------------+
+        $ php exec <u>welcome/examples/console</u>  <u>a=1 b=2 userId=8 product category</u>
+                           &boxv;                        &boxv; 
+        route:&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxul;                        &boxv; 
+                                                    &boxv; 
+        all query parameters: &boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxul;
 
         the contains of _request()  would be
         {
@@ -38,16 +36,17 @@
         - While a parameter without '=' will be treated as a numeric index in a continuous sequence.
 
 
-        When executed in a web browser at the URL http://cs8.mx21/welcome/examples/console-command?a=1&b=2&0=code&mx=yes&1=debug 
+        When executed in a web browser at the URL http://cs8.mx21/welcome/examples/console?a=1&b=2&0=code&mx=yes&1=debug 
         the following message is displayed:
 
         <b class="error">Unauthorized: Access to the resource is denied.</b>
 
-        this is because in the controller we have:
+        this is because in the controller we have the line <i>$this->is_console();</i>, that allows console only:
         <p class="code">
+            class welcome_examples_consoleController <b>extends _system_default</b> 
             public function console_command()
             {
-                <i>i$this->is_console();</i>
+                <i>$this->is_console();</i>
     
         </p>
 
