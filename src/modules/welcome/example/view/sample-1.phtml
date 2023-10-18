@@ -33,9 +33,12 @@
                 <li> Load model overwrites from the "config/overwrite/" folder.</li>
                 <li>Find the controller based on the defined routes(all .route.php in enabled modules).</li>
                 <li>Prepare the data using the _request() function.</li>
+                <li>Call pre-processors if route defines</li>
                 <li>Call the controller.</li>
                 <li>Optionally, the controller may call models to prepare data.</li>
+                <li>Call post-processors if route defines</li>
                 <li>Return data or call a view file based on the controller's return.</li>
+                <li>* if no view, the pre and post will not included in the result.</li>
             </ol>
         </li>
     </ol>

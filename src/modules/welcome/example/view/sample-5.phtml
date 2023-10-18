@@ -2,27 +2,10 @@
 <div class="main">
     <h1>Welcome CS8</h1>
 </div>
-<h2>Example - some console commands</h2>
+<h2>Example - helper functions</h2>
 <div class="p8">
     <p>
         &langle; <a href="<?=_routes('welcome');?>"> back</a>
-    </p>
-    <p class="code">
-
-        # list all modules
-        $php exec console/module-list
-
-        # enable a module
-        $php exec console/module-enable dummy
-        # disable a module
-        $php exec console/module-disable dummy
-
-        # install a module
-        $php exec console/module-install data/tmp/dummy.zip
-        # uninstall a module (* module name must match the folder name and enabled config file name)
-        $php exec console/module-uninstall dummy
-
-
     </p>
     <dl>
         <dt>
@@ -48,14 +31,6 @@
             _d($x, $die = false, $display = true, $tab = 6, $deep = 50, $level = 0)
         </dt>
         <dd>output debug info, die if 2nd value passed in (!= false) </dd>
-        <dt>
-            _factory(): class object
-        </dt>
-        <dd>create singleton model (standard model)<br>
-            _factory($name, $constructor_data1= ,$constructor_data2=......)
-            <br>
-            $user = _factory('admin_user_model')->get(['id'=>12]);
-        </dd>
         <dt>
             _module(): array
         </dt>

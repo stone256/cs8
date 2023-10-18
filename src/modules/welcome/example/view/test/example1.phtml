@@ -21,16 +21,20 @@
         '/welcome' => 'welcome/example/index@index',
         ]);
 
+
         // routing with prefix and pre and post processor
         routing([
         'test/:id/user/:user' => 'welcome/example/test@example1|welcome.example1',
-        ])->prefix('welcome')
+        ])
+        ->prefix('welcome')
         ->before(['welcome_example_model@cors', [Test::class, 'show']])
         ->after(['welcome_example_model@json']);
+
 
         // use class type
         routing(['/welcome/examples/post/:id' => [exampleController::class, 'example2', 'welcome.example2']]);
 
+        // use string type
         routing(['/welcome/modules/list' => 'welcome/module/index@list|welcome.modules.list']);
 
 
@@ -52,6 +56,9 @@
         <dd>pre-processors: method cros() in model class 'welcome_model' and method show() of test class</dd>
         <dt>->after(['welcome_model@json']);</dt>
         <dd>post processors, same as pre-processors</dd>
+        <dt>*note</dt>
+        <dd>you can not mix use of string type and class type routing for one controller. but can mix them for different
+            controllers</dd>
     </dl>
     <pre>
         <?php print_r($data);?>
