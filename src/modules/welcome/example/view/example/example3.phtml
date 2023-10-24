@@ -7,14 +7,24 @@
     <p>
         &langle; <a href="<?=_routes('welcome');?>"> back</a>
     </p>
+
+    <pre>
+        system provide a way to allow you call a controller from console command line, similar to you browser the url with some differences:
+    </pre>
+
+    <p class="code">
+        browser
+        $ http://localhost:8888/<b>welcome/examples/console?a=1&b=2&userId=8&product&category</b>
+    </p>
+
     <p class="code">
         ## command line
-        $ php exec /welcome/examples/console a=1 b=2 userId=8 product category
+        $ php exec <b>/welcome/examples/console a=1 b=2 userId=8 product category</b>
     </p>
     <pre class="structure">
         <h3>explains</h3>
         - run under src folder
-        $ php exec <u>welcome/examples/console</u>  <u>a=1 b=2 userId=8 product category</u>
+        $ php exec <b><u>welcome/examples/console</u>  <u>a=1 b=2 userId=8 product category</u></b>
                            &boxv;                        &boxv; 
         route:&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&boxul;                        &boxv; 
                                                     &boxv; 
@@ -30,7 +40,7 @@
             "__start__": 1697083173.723353
         }
 
-        __start__ = start time: microtime(1);
+        __start__ = start in microtime(1);
 
         - A parameter specified with '=' will be interpreted as a key=>value pair, 
         - While a parameter without '=' will be treated as a numeric index in a continuous sequence.
@@ -52,5 +62,8 @@
 
     </pre>
 
+    <pre>
+        Of cause, you can always use curl or other type http clients... 
+    </pre>
 </div>
 <?php include _X_LAYOUT . '/welcome/footer.phtml';?>

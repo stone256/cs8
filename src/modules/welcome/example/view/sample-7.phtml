@@ -8,21 +8,20 @@
         &langle; <a href="<?=_routes('welcome');?>"> back</a>
     </p>
     <b>modules/simple/.route.php</b>
-    <p class="code">
+    <pre class="code">
         &lt;php
 
         // type string [ "url" => "module-path-to-class/controller-name@handle-method|route name"]
         routing(['simple/articles/:id' => "simple/index@articles|simple.article"]);
-        ## the controller-name worked as: "simple/product@find" refers to "function find(){}" in
-        "module/simple/productController.php"
-    </p>
+        ## the controller-name worked as: "simple/product@find" refers to "function find(){}" in "module/simple/productController.php"
+    </pre>
 
     <b>modules/simple/productController.php</b>
     <p class="code">
         &lt;php
 
-        #class simple_productController extends _system_default
-        class simple_productController
+        ## class simple_productController extends _system_default
+        class simple_productController {...}
     </p>
 
     <pre>

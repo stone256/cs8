@@ -14,11 +14,14 @@
 
         use modules\welcome\example\exampleController;
 
-        // type class [ "url" => [ "class", "handle-method", "route name"]
-        routing(['examples/post/:id' => [exampleController::class, 'example2', 'welcome.example2']]);
+        # type class [ "url" => [ "class", "handle-method", "route name"]
+        routing(['examples/post/:id' => [exampleController::class, 'example2','welcome.example2']]);
 
-        // type string [ "url" => "module-path-to-class/controller-name@handle-method|route name"]
+
+
+        # type string [ "url" => "module-path-to-class/controller-name@handle-method|route name"]
         routing(['simple/articles/:id' => "simple/index@articles|simple.article"]);
+
         ## the controller-name worked as:
         ## "simple/product@find" refers to "function find(){}" in "modules/simple/productController.php"
     </p>
