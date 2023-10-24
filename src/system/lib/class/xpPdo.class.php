@@ -1,6 +1,16 @@
 <?php
 
 
+/**
+ *  you can pass data credential to class or it will use default database setting in global $config['db']
+ * $config['db'] = array( //for testing database
+ *   'host' => 'localhost',
+ *   'database' => 'database-name',
+ *   'user' => 'user-name',
+ *   'password' => 'password',
+ * );
+ */
+
 class xpPdo
 {
 

@@ -4,18 +4,11 @@ nbproject
 cs
 
 src/config/.local.php
-srv/vendor
+src/vendor
 src/node_modules
 src/public/hot
 src/public/storage
 
-src/data/*.key
-src/data/log
-src/data/tmp
-!src/data/tmp/dummy.zip
-script.pl
-src/data/cache
-src/data/batch
 
 
 

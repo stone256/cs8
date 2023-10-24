@@ -35,7 +35,7 @@ class console_indexController extends _system_controller
         die("\nModule: $module enabled\n\n");
     }
 
-    public function module_disable()
+    public function module_disable($continue = false)
     {
         $module = $this->_module_check();
 
@@ -49,6 +49,9 @@ class console_indexController extends _system_controller
                 unlink($f);
                 die("\nModule: $module disabled\n\n");
             }
+        }
+        if ($continue) {
+            return;
         }
         die("\nModule already disabled\n\n");
     }
@@ -73,58 +76,54 @@ class console_indexController extends _system_controller
             die("\nMust be .zip file\n\n");
         }
 
-        $file = str_replace('.zip', '', basename($zip));
+        $module = str_replace('.zip', '', basename($zip));
 
-        if (file_exists(_X_MODULE . '/' . $file)) {
-            die("\nModule already existed\n\n");
-        }
+        // # allow update
+        // if (file_exists(_X_MODULE . '/' . $module)) {
+        //     die("\nModule already existed\n\n");
+        // }
 
-        $id = uniqid();
-        //create tmp folder 
-        $tmp = _X_TMP . '/' . $id;
-        $cmd = "mkdir -pm 0775 $tmp";
-        exec($cmd);
 
-        chdir($tmp);
-        $cmd = "unzip $zip";
-        exec($cmd);
 
-        // find module folder
-        $cmd = "find $tmp -iname $file";
-        $rs = exec($cmd);
+        $cmd = "cd " . _X_MODULE . " && unzip -o $zip -d ./";
+        echo "\n" . exec($cmd);
+        $cmd = "chmod 0755 -R " . _X_MODULE . "/$module";
+        echo "\n" . exec($cmd);
 
-        $cmd = "mv $rs " . _X_MODULE;
-        $rs = exec($cmd);
-
-        $cmd = "rm -r $tmp";
-        $rs = exec($cmd);
-
-        die("\n$file installed,. please enabled it to use\n\n");
+        die("\n$module installed,. please enabled it before using\n\n");
         return;
     }
 
     // this is console cmd
     function module_uninstall()
     {
-        $module = $this->_module_check();
 
-        $folder = _X_MODULE . '/' . $module;
+        // disable module if not already disabled.
+        $this->module_disable('no-exit');
+
+
+        $module = $this->_module_check();
+        $folder = str_replace('//', '/', _X_MODULE . '/' . $module);
 
         if (!is_dir($folder)) {
             die("module not found!");
         }
 
-        $file = _X_TMP . "/{$module}.zip";
-
-        $cmd = "zip -r $file $folder";
-        $r = exec($cmd);
+        $file = _X_TMP . "{$module}.zip";
+        $cmd = "cd " . _X_MODULE . " && zip -r $file " . str_replace('/', '', $module);
+        echo $r = exec($cmd);
 
         if (preg_match('/error\:/ims', $r)) {
             $msg =  $r;
         } else {
+            // run uninstall script if existed
+            if (file_exists("$folder/.uninstall.php")) {
+                include "$folder/.uninstall.php";
+            }
             $msg = 'zip: ' . str_replace(_X_ROOT . '/', '', $file);
             $cmd = "rm -r $folder";
             $msg .= "\n" . exec($cmd);
+            $msg .= "\n uninstall {$module} finished";
         }
         die($msg . "\n\n");
     }
