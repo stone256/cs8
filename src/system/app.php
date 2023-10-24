@@ -68,9 +68,6 @@ class App
             if (file_exists($route_file)) {
                 include_once($route_file);
             }
-            //load modules update scripts, if any
-            $us = glob(_X_MODULE . $vm . '/.setup.*.php') ?? [];
-            self::$update_scripts = [...self::$update_scripts, ...$us];
         }
         // get overwrite model (global $overwrite)
         foreach (xpFile::file_in_dir(_X_MODEL_OVERWRITE, array('level' => 5, 'path' => true)) as $k => $v) {
@@ -197,6 +194,7 @@ class App
     {
         $missing = $v;
         if (_X_CLI_CALL === true) die("\n" . $v . "\n\n");
+        http_response_code(404);
         require_once _X_404_PAGE;
         die();
     }

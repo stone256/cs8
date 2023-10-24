@@ -57,38 +57,99 @@ class console_indexController extends _system_controller
     }
 
 
-    // this is console cmd
+    // this is console cmd install or update
     function module_install()
     {
         $this->is_console();
 
         $q = _request();
-        $zip = preg_replace('/[^a-z0-9_\/\.]/ims', '', $q[0]);
+        $zip =  $q[0] ?? '';
 
-        // locate zip file
-        if (!preg_match('/^(\/|http)/ims', $zip)) {
-            // relative path
-            $path = _X_ROOT . '/' . $zip;
-            $zip = realpath($path);
+        /**
+         * 1 only a-z0-9 : module
+         * 2 http.... .zip: download remote model to local data/tmp use wget.
+         * 3 local zip
+         * 4 all other error;  
+         */
+
+        switch (true) {
+                //as module name
+            case preg_match('/^[a-z][a-z0-9\_]+$/ims', $zip):
+                $module = $zip;
+                $path = _X_TMP . "/{$zip}.zip";
+                if (!file_exists($path)) {
+                    die("\n Install module isn't found in cache: data/tmp/{$zip}.zip\n\n");
+                }
+                break;
+                // http url
+            case preg_match('/^http[s]*\:\/\/.*?\/([a-z][a-z0-9\_]+)\.zip$/ims', $zip, $match):
+                $module = $match[1];
+                $path = _X_TMP . '/' . $match[1] . ".zip";
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $zip);
+                curl_setopt($ch, CURLOPT_HEADER, true);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                //for https
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+                curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/117.0');
+                $response = curl_exec($ch);
+                curl_close($ch);
+
+                $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+                if ($httpCode < 200 || $httpCode > 299) {
+                    die("\n Failed to fetch the URL: $zip\n\n");
+                }
+
+                file_put_contents($path, $response);
+                break;
+                // local zip file from root folder
+            case preg_match('/^\/.*?([^\/]*?)\.zip$/ims', $zip, $match):
+                $module = $match[1];
+                if (!file_exists($zip)) {
+                    die("\n Did not found $zip\n\n");
+                }
+                $path = realpath($zip);
+                break;
+                // relative folder location 
+            case preg_match('/^[^\/].*?([^\/]*?)\.zip$/ims', $zip, $match):
+                $module = $match[1];
+                $path = realpath($zip);
+                if (!file_exists($path)) {
+                    die("\n Did not found $zip\n\n");
+                }
+                break;
+            default:
+                echo "\nMust be zip \n";
+                echo "\nNot able to read other than English-ish, \n";
+                echo "if you use other set character, please modify\n",
+                " - file : " . __FILE__ . "\n",
+                " - line : " . __LINE__ . "\n";
+                die("\n");
         }
 
-        if (!preg_match('/\.zip$/ims', $zip)) {
-            die("\nMust be .zip file\n\n");
-        }
 
-        $module = str_replace('.zip', '', basename($zip));
-
-        // # allow update
-        // if (file_exists(_X_MODULE . '/' . $module)) {
-        //     die("\nModule already existed\n\n");
-        // }
-
-
-
-        $cmd = "cd " . _X_MODULE . " && unzip -o $zip -d ./";
+        $cmd = "cd " . _X_MODULE . " && unzip -o $path -d ./";
         echo "\n" . exec($cmd);
         $cmd = "chmod 0755 -R " . _X_MODULE . "/$module";
         echo "\n" . exec($cmd);
+
+        //load modules update scripts, if any
+        $us = glob(_X_MODULE . '/' . $module . '/.setup.*.php') ?? [];
+        foreach ($us as $file) {
+            if (file_exists("{$file}.done")) {
+                // already run this 
+                unlink($file);
+                echo "\n Already run " . basename($file) . "\n\n";
+            } else {
+                // run this 
+                include_once $file;
+                rename($file, "{$file}.done");
+                echo "\n Run " . basename($file) . "\n\n";
+            }
+        }
 
         die("\n$module installed,. please enabled it before using\n\n");
         return;
