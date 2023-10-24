@@ -2,31 +2,65 @@
 <div class="main">
     <h1>Welcome CS8</h1>
 </div>
-<h2>Example - console commands</h2>
+<h2>Console command: Module Install/Update/Uninstall</h2>
 <div class="p8">
     <p>
         &langle; <a href="<?=_routes('welcome');?>"> back</a>
     </p>
+
+    <h3>Install/Update</h3>
     <p class="code">
 
         ## install a modules from zip file
+        # local file use relative path to "src" folder:
         $ php exec console/module-install data/tmp/dummy.zip
 
+
+        # local file use absolute path:
+        $ php exec console/module-install /opt/downloads/dummy.zip
+
+
+        # http/https
+        $ php exec console/module-install http://my.examples.com/libraries/cs8/modules/dummy.zip
+
+        # use modules name, zip file must still there in the cache folder src/data/tmp/xxxx.zip
+        $ php exec console/module-install dummy
+
+        # you can use "update" in the same way
+        $ php exec console/module-update http://my.examples.com/libraries/cs8/modules/v2/dummy.zip
+
+    </p>
+    <ul>
+        <li>
+            Both install/update will search the module root folder for setup file: .setup.x.x.x.x.php
+        </li>
+        <li>
+            if file found. e.g. ".setup.1.0.0.1.php" then it check if ".setup.1.0.0.1.php.done" is existed
+        </li>
+        <li>
+            if not, ".setup.1.0.0.1.php" will run once and rename to ".setup.1.0.0.1.php.done" to prevent its running
+            next time.
+        </li>
+    </ul>
+
+    <h3>Uninstall</h3>
+    <p class="code">
         ## uninstall module (* module name must match the folder name and enabled config file name)
         $ php exec console/module-uninstall dummy
     </p>
-    <pre>
-        <h3>explains</h3>
-        When installing or uninstalling a module, it is essential for the module's name to correspond with the folder name located 
-        directly under the primary "modules" folder.
 
-        During the un-installation process, the folder will be compressed into a zip file with the same name as the folder itself. This zip file will then be placed within the "data/tmp/" directory. 
-        Subsequently, the folder will be deleted.
-        
-        Once the installation is complete, remember to enable the module.
+    <ol>
+        <li>
+            uninstall script will first search the module root folder for .uninstall.php, and run once if file existed.
+        </li>
+        <li>
+            the folder will be zip to the module-name.zip e.g. dummy.zip and saved to src/data/tmp
+        </li>
+        <li>
+            module folder will be removed
+        </li>
+    </ol>
 
-        ** note: this method can only install module under the "modules" folder!!! 
-    </pre>
 
 </div>
 <?php include _X_LAYOUT . '/welcome/footer.phtml';?>

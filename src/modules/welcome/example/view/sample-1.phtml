@@ -23,14 +23,6 @@
                 <li>Load ".local.php" (local settings).</li>
                 <li>Load system files: helper, logger, router, controller, etc.</li>
                 <li>Load local routes from enabled modules:
-                    <ol>
-                        <li>Check if there are setup files (e.g., setup.0.0.0.1.php, where ".0.0.0.1" is the version
-                            number).
-                        </li>
-                        <li>Run the setup files once according to the version's order and rename them as
-                            setup.0.0.0.1.php.done.
-                        </li>
-                    </ol>
                 </li>
                 <li> Load model overwrites from the "config/overwrite/" folder.</li>
                 <li>Find the controller based on the defined routes(all .route.php in enabled modules).</li>
