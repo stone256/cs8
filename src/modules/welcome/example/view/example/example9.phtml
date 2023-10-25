@@ -1,11 +1,11 @@
-<?php include _X_LAYOUT . '/welcome/header.phtml';?>
+<?php include _layout() . '/header.phtml';?>
 <div class="main">
     <h1>Welcome CS8</h1>
 </div>
 <h2>Example - some console commands</h2>
 <div class="p8">
     <p>
-        &langle; <a href="<?=_routes('welcome');?>"> back</a>
+        &langle; <a href="<?=_route('welcome');?>"> back</a>
     </p>
     <p class="code">
 
@@ -75,7 +75,7 @@
             post,get, json body, url embedded ('/test/:id/:category')..
         </dd>
         <dt>
-            _routes(string $name, array $data = [], $relative = false): string
+            _route(string $name, array $data = [], $relative = false): string
         </dt>
         <dd>make url, and return either full url or just path without domain if $relative=true</dd>
         <dt>
@@ -85,4 +85,4 @@
     </dl>
 
 </div>
-<?php include _X_LAYOUT . '/welcome/footer.phtml';?>
+<?php include _layout() . '/footer.phtml';?>

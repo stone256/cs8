@@ -57,8 +57,9 @@ function _csrf(bool | string  $token = false): bool | string
 }
 
 
-// get or set routes
-function _routes(string $name, array $data = [], $relative = false): string
+
+// get url by route
+function _route(string $name, array $data = [], $relative = false): string
 {
     // for cache all routes handle
     static $names;
@@ -133,9 +134,38 @@ function _config($name, $value = null)
     xpAS::set($config, $name, $value);
 }
 
-// return all modules path
-function _module()
+// return assert folder 
+function _assert($assert, $module_name = false)
 {
+    if (!$module_name) {
+        $path = _X_MODULE . '/' . routing()->matched('assert');
+    }
+    foreach (routing()->list() as $key => $value) {
+        if ($module_name == $value['module']) {
+            $path = _X_MODULE . '/' . $value['assert'];
+        }
+    }
+
+    return $path . '/' . $assert;
+}
+
+// return module layout folder 
+function _layout($module_name = false)
+{
+    if (!$module_name) {
+        return _X_MODULE . '/' . routing()->matched('layout');
+    }
+    foreach (routing()->list() as $key => $value) {
+        if ($module_name == $value['module']) {
+            return _X_MODULE . '/' . $value['layout'];
+        }
+    }
+}
+
+// return all modules path
+function _module($current = false)
+{
+
     $list = [];
     // available modules i-under /modules
     $cmd = 'find ' . _X_MODULE . ' -name .route.php -type f';

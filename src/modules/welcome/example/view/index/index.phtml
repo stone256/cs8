@@ -1,4 +1,4 @@
-<?php include _X_LAYOUT . '/welcome/header.phtml';?>
+<?php include _layout() . '/header.phtml';?>
 <div class="main">
     <h1>Welcome CS8</h1>
 </div>
@@ -8,40 +8,39 @@
             <div class='column'>
 
             </div>
-
             <div class='column index'>
                 <ul>
                     <li class="b1">
-                        <a href="<?=_routes('welcome.sample', ['id'=>0]);?>"> Install App</a>
+                        <a href="<?=_route('welcome.sample', ['id'=>0]);?>"> Install App</a>
                     </li>
                     <li class="b">
-                        <a href="<?=_routes('welcome.example5');?>"> Folder structure</a>
+                        <a href="<?=_route('welcome.example5');?>"> Folder structure</a>
                     </li>
                     <li class="b">
-                        <a href="<?=_routes('welcome.sample', ['id'=>6]);?>"> Hello World</a>
+                        <a href="<?=_route('welcome.sample', ['id'=>6]);?>"> Hello World</a>
                     </li>
                     <li>
-                        <a href="<?=_routes('welcome.sample', ['id'=>1]);?>"> How it's put together ?</a>
+                        <a href="<?=_route('welcome.sample', ['id'=>1]);?>"> How it's put together ?</a>
                     </li>
                     <li class="b">
-                        <a href="<?=_routes('welcome.example2', ['id' => 100, 'user' => 1009]);?>"> Routing and
+                        <a href="<?=_route('welcome.example2', ['id' => 100, 'user' => 1009]);?>"> Routing and
                             Controllers</a>
                     </li>
                     <li class="b">
-                        <a href="<?=_routes('welcome.example1', ['id' => 2, 'user' => 88]);?>"> Routing - full
+                        <a href="<?=_route('welcome.example1', ['id' => 2, 'user' => 88]);?>"> Routing - full
                             description </a>
                     </li>
                     <li class="b">
-                        <a href="<?=_routes('welcome.sample', ['id'=>7]);?>"> Controllers</a>
+                        <a href="<?=_route('welcome.sample', ['id'=>7]);?>"> Controllers</a>
                     </li>
                     <li class="b">
-                        <a href="<?=_routes('welcome.sample', ['id'=>2]);?>"> Where do i find/put view ?</a>
+                        <a href="<?=_route('welcome.sample', ['id'=>2]);?>"> Where do i find/put view ?</a>
                     </li>
                     <li class="b">
-                        <a href="<?=_routes('welcome.sample', ['id'=>3]);?>"> Using model / factory function</a>
+                        <a href="<?=_route('welcome.sample', ['id'=>3]);?>"> Using model / factory function</a>
                     </li>
                     <li>
-                        <a href="<?=_routes('welcome.example4');?>"> Model(standard type) over-write</a>
+                        <a href="<?=_route('welcome.example4');?>"> Model(standard type) over-write</a>
                     </li>
 
 
@@ -51,29 +50,29 @@
                 <ul>
 
                     <li>
-                        <a href="<?=_routes('welcome.example3');?>"> Run console commands</a>
+                        <a href="<?=_route('welcome.example3');?>"> Run console commands</a>
                     </li>
 
                     <li>
-                        <a href="<?=_routes('welcome.example6');?>"> Module install, uninstall</a>
+                        <a href="<?=_route('welcome.example6');?>"> Module install, uninstall</a>
                     </li>
 
                     <li>
-                        <a href="<?=_routes('welcome.example7');?>"> Module enable, disable</a>
+                        <a href="<?=_route('welcome.example7');?>"> Module enable, disable</a>
                     </li>
                     <li>
-                        <a href="<?=_routes('welcome.example8');?>"> Module list</a>
+                        <a href="<?=_route('welcome.example8');?>"> Module list</a>
                     </li>
                     <li>
-                        <a href="<?=_routes('welcome.example9');?>"> Some console commands</a>
+                        <a href="<?=_route('welcome.example9');?>"> Some console commands</a>
                     </li>
 
 
                     <li>
-                        <a href="<?=_routes('welcome.sample', ['id'=>4]);?>"> Using system log</a>
+                        <a href="<?=_route('welcome.sample', ['id'=>4]);?>"> Using system log</a>
                     </li>
                     <li>
-                        <a href="<?=_routes('welcome.sample', ['id'=>5]);?>"> More Helper functions</a>
+                        <a href="<?=_route('welcome.sample', ['id'=>5]);?>"> More Helper functions</a>
                     </li>
                 </ul>
             </div>
@@ -88,4 +87,4 @@
 
 
 </div>
-<?php include _X_LAYOUT . '/welcome/footer.phtml';?>
+<?php include _layout() . '/footer.phtml';?>

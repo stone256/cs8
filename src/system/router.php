@@ -40,6 +40,8 @@ class Router
 
     public static $last_data = [];
 
+    public static $matched;
+
     public function match($uri)
     {
         $matches = [];
@@ -68,9 +70,14 @@ class Router
         foreach ($route['params'] ?? [] as $k => $v) {
             _request($k, $v);
         }
-        return $route;
+        return self::$matched = $route;
     }
 
+    public function matched($key = false)
+    {
+        $res = self::$matched;
+        return $key ? xpAS::get($res, $key) : $res;
+    }
     public function list()
     {
         return self::$routes;
@@ -79,6 +86,16 @@ class Router
     //save routes info
     public function set($routes)
     {
+        // find module (only in standard format)
+        $r = debug_backtrace();
+        $module = str_replace(_X_MODULE . '/', '', $r[1]['file']);
+        // standard view folder
+        $view = str_replace('.route.php', 'view', $module);
+        $layout = str_replace('.route.php', 'layout', $module);
+        $assert = str_replace('.route.php', 'assert', $module);
+        $module = preg_replace('/\/\.route\.php$/ims',  '', $module);
+        $module = str_replace('/',  '_', $module);
+
         $routes = is_array($routes) ? $routes : [$routes];
         $last_data = [];
         foreach ($routes as $k => $v) {
@@ -95,6 +112,10 @@ class Router
                 'key' => $k,
                 'pattern' => $this->match_pattern($k),
                 'name' => $controller['name'],
+                'module' => $module,
+                'assert' => $assert,
+                'layout' => $layout,
+                'view' => $view,
             ];
         }
         self::$last_data = $last_data;

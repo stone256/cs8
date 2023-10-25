@@ -1,11 +1,11 @@
-<?php include _X_LAYOUT . '/welcome/header.phtml';?>
+<?php include _layout() . '/header.phtml';?>
 <div class="main">
     <h1>Welcome CS8</h1>
 </div>
 <h2>Example - folder structure</h2>
 <div class="p8">
     <p>
-        &langle; <a href="<?=_routes('welcome');?>"> back</a>
+        &langle; <a href="<?=_route('welcome');?>"> back</a>
     </p>
     <pre class="structure">
       <span class="folder">[src]</span>
@@ -24,7 +24,7 @@
         &#9474;      &#9474;
         &#9474;      &#9493;&#9472;&#9472;&#9472;<span class="folder">[log]</span> # store system log files..
         &#9474;   
-        &#9500;&#9472;&#9472;&#9472;<span class="folder">[layout]</span> # project common html structure files
+        &#9500;&#9472;&#9472;&#9472;<span class="folder">[layout]</span> # project common html structure files. * there are module specified layout in module folder
         &#9474;      &#9474;
         &#9474;      &#9493;&#9472;&#9472;&#9472;<span class="file">_404.phtml</span> # default 404 page
         &#9474;   
@@ -35,6 +35,8 @@
         &#9474;      &#9500;&#9472;&#9472;&#9472;<span class="file">indexController.php</span> # controller file 
         &#9474;      &#9474;
         &#9474;      &#9500;&#9472;&#9472;&#9472;<span class="folder">[view]</span>
+        &#9474;      &#9474;      &#9474;
+        &#9474;      &#9474;      &#9500;&#9472;&#9472;&#9472;<span class="folder">[layout]</span> # default layout folder for module"
         &#9474;      &#9474;      &#9474;
         &#9474;      &#9474;      &#9493;&#9472;&#9472;&#9472;<span class="folder">[index]</span> # store view file for indexController hence "index" ==> "indexController"
         &#9474;      &#9474;             &#9474;
@@ -67,4 +69,4 @@
     </pre>
 
 </div>
-<?php include _X_LAYOUT . '/welcome/footer.phtml';?>
+<?php include _layout() . '/footer.phtml';?>

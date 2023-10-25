@@ -11,6 +11,7 @@ class console_indexController extends _system_controller
 
 
     protected $system_modules =  [
+        "/helper",
         '/console',
         '/welcome/example',
         '/welcome/module/enabled',

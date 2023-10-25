@@ -1,11 +1,11 @@
-<?php include _X_LAYOUT . '/welcome/header.phtml';?>
+<?php include _layout() . '/header.phtml';?>
 <div class="main">
     <h1>Welcome CS8</h1>
 </div>
 <h2>Example - helper functions</h2>
 <div class="p8">
     <p>
-        &langle; <a href="<?=_routes('welcome');?>"> back</a>
+        &langle; <a href="<?=_route('welcome');?>"> back</a>
     </p>
     <dl>
         <dt>
@@ -32,7 +32,11 @@
         </dt>
         <dd>output debug info, die if 2nd value passed in (!= false) </dd>
         <dt>
-            _module(): array
+            _layout($module_name = false)
+        </dt>
+        <dd>return absolute folder path of a module's view/layout, use current module if name not supplied</dd>
+        <dt>
+            _module($current=false): array
         </dt>
         <dd>get all modules: return array like:
             <pre>
@@ -41,6 +45,7 @@
                 [active] =>[  [1] => /welcome/example... ]
                 [inactive] =>[  [0] => /welcome/module/activeTest... ]
             ]
+            * if($current) return module that currently handles call
             </pre>
         </dd>
         <dt>
@@ -50,7 +55,7 @@
             post,get, json body, url embedded ('/test/:id/:category')..
         </dd>
         <dt>
-            _routes(string $name, array $data = [], $relative = false): string
+            _route(string $name, array $data = [], $relative = false): string
         </dt>
         <dd>make url, and return either full url or just path without domain if $relative=true</dd>
         <dt>
@@ -60,4 +65,4 @@
     </dl>
 
 </div>
-<?php include _X_LAYOUT . '/welcome/footer.phtml';?>
+<?php include _layout() . '/footer.phtml';?>

@@ -1,11 +1,11 @@
-<?php include _X_LAYOUT . '/welcome/header.phtml';?>
+<?php include _layout() . '/header.phtml';?>
 <div class="main">
     <h1>Welcome CS8</h1>
 </div>
 <h2>Example - helper functions</h2>
 <div class="p8">
     <p>
-        &langle; <a href="<?=_routes('welcome');?>"> back</a>
+        &langle; <a href="<?=_route('welcome');?>"> back</a>
     </p>
     <ol>
         <li>Start the application using one of the following methods:
@@ -37,4 +37,4 @@
         </li>
     </ol>
 </div>
-<?php include _X_LAYOUT . '/welcome/footer.phtml';?>
+<?php include _layout() . '/footer.phtml';?>
