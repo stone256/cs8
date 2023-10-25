@@ -1,0 +1,40 @@
+<?php include _layout() . '/header.phtml';?>
+<div class="main">
+    <h1>Welcome CS8</h1>
+</div>
+<h2>URL: assert _route()</h2>
+<div class="p8">
+    <p>
+        &langle; <a href="<?=_route('welcome');?>"> back</a>
+    </p>
+    <b>Special route a=called 'assert' for helping push the assert to public</b>
+    <pre class="code">
+        echo _route('assert', ['module'=>'welcome_example','assert'=>'welcome.css', 'version'=>1.21]);
+
+        # => http:://DOMAIN/assert/welcome_example/welcome.css/1.21
+    </pre>
+    <pre>
+        and this will get assert form _X_MODULE . "/welcome/example/assert/welcome.css"
+
+        e.g. 
+        &lt;link rel="stylesheet" 
+            type="text/css" 
+            href="&lt;?=_route('assert', ['module'=&gt;'welcome_example','assert'=&gt;'welcome.css', 'version'=&gt;1]);?&gt;"&gt;
+    </pre>
+
+    <pre>
+        Sub-folder in assert Folder, use "~" to replace "/"
+        e.g. 
+        _route('assert', ['module'=>'welcome_example','assert'=>'images~admin.jpg', 'version'=>1]);
+
+        'images~admin.jpg' : 'images/admin.jpg'
+
+    </pre>
+
+
+
+
+
+
+</div>
+<?php include _layout() . '/footer.phtml';?>
