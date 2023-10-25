@@ -145,7 +145,7 @@ function _assert($assert, $module_name = false)
             $path = _X_MODULE . '/' . $value['assert'];
         }
     }
-
+    $assert = preg_replace('/[~]/ims', '/', $assert);
     return $path . '/' . $assert;
 }
 

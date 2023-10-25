@@ -62,12 +62,24 @@ dt {
 .structure {
     color:cadetblue;
 }
+
+
 .folder {
-    background:goldenrod;
-    color:darkgreen
+    width:30px;
+    margin: 3px auto;
+    margin-top: 50px;
+    position: relative;
+    background-color: lemonchiffon;
+    border-radius: 0 4px 4px 4px;
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.59);
+    padding:2px;
 }
+
+
+
 .file {
     color:darkslategrey;
+    padding:4px;
 }
 
 .error {
