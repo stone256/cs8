@@ -10,6 +10,9 @@ src/public/hot
 src/public/storage
 
 
+src/config/enabled/local_test.php
+src/modules/local_test
+
 
 
 
