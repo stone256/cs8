@@ -156,8 +156,13 @@ class console_indexController extends _system_controller
         return;
     }
 
+    function module_zip()
+    {
+        $this->module_uninstall('no delete');
+    }
+
     // this is console cmd
-    function module_uninstall()
+    function module_uninstall($undelete = false)
     {
 
         // disable module if not already disabled.
@@ -174,10 +179,13 @@ class console_indexController extends _system_controller
 
         // reverse setup.w.x.y.z.php.done => setup.w.x.y.z.php. so it can run in next install
         $done = glob("$folder/.*.done");
+        $renamed = [];
         foreach ($done as $file) {
             $name = basename($file);
             if (preg_match('/^\.setup(\.\d+){4}\.php\.done$/ims', $name)) {
-                $r = rename($file, preg_replace('/\.done$/ims', '', $file));
+                $file1 = preg_replace('/\.done$/ims', '', $file);
+                rename($file, $file1);
+                $renamed[$file] = $file1;
             }
         }
         $file = _X_TMP . "{$module}.zip";
@@ -189,17 +197,27 @@ class console_indexController extends _system_controller
 
         if (preg_match('/error\:/ims', $r)) {
             $msg =  $r;
-        } else {
-            // run uninstall script if existed
-            if (file_exists("$folder/.uninstall.php")) {
-                include "$folder/.uninstall.php";
+            // reverse the setup.x.x.x.x.php.done changes
+            foreach ($renamed as $file => $file1) {
+                rename($file1, $file);
             }
-
-            $msg = 'zip: ' . str_replace(_X_ROOT . '/', '', $file);
-            $cmd = "rm -r $folder";
-            $msg .= "\n" . exec($cmd);
-            $msg .= "\n uninstall {$module} finished";
+            die($msg . "\n\n");
         }
+        if ($undelete) {
+            foreach ($renamed as $file => $file1) {
+                rename($file1, $file);
+            }
+            die("\n\n Zipped to folder data/tmp{$module}.zip \n\n");
+        }
+        // run uninstall script if existed
+        if (file_exists("$folder/.uninstall.php")) {
+            include "$folder/.uninstall.php";
+        }
+
+        $msg = 'zip: ' . str_replace(_X_ROOT . '/', '', $file);
+        $cmd = "rm -r $folder";
+        $msg .= "\n" . exec($cmd);
+        $msg .= "\n uninstall {$module} finished";
         die($msg . "\n\n");
     }
 

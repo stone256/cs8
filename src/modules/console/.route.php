@@ -13,5 +13,6 @@ routing([
     '/module-install' => 'console/index@module_install',
     '/module-update' => 'console/index@module_install',
     '/module-uninstall' => 'console/index@module_uninstall',
+    '/module-zip' => 'console/index@module_zip',
 
 ])->prefix('/console');
