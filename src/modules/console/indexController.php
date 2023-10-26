@@ -171,7 +171,19 @@ class console_indexController extends _system_controller
             die("module not found!");
         }
 
+
+        // reverse setup.w.x.y.z.php.done => setup.w.x.y.z.php. so it can run in next install
+        $done = glob("$folder/.*.done");
+        foreach ($done as $file) {
+            $name = basename($file);
+            if (preg_match('/^\.setup(\.\d+){4}\.php\.done$/ims', $name)) {
+                $r = rename($file, preg_replace('/\.done$/ims', '', $file));
+            }
+        }
         $file = _X_TMP . "{$module}.zip";
+        if (file_exists($file)) {
+            unlink($file);
+        }
         $cmd = "cd " . _X_MODULE . " && zip -r $file " . str_replace('/', '', $module);
         echo $r = exec($cmd);
 
@@ -182,6 +194,7 @@ class console_indexController extends _system_controller
             if (file_exists("$folder/.uninstall.php")) {
                 include "$folder/.uninstall.php";
             }
+
             $msg = 'zip: ' . str_replace(_X_ROOT . '/', '', $file);
             $cmd = "rm -r $folder";
             $msg .= "\n" . exec($cmd);
