@@ -1,0 +1,20 @@
+<?php
+
+ ?>
+<?php $page_title = $data['TITLE'] ?? 'SITEMIN'; ?>
+<?php $page_name = $data['NAME'] ?? 'SITEMIN'; ?>
+<?php include _layout('sitemin') .'/header.phtml'; ?>
+<?php include _layout('sitemin') . '/nav.phtml'; ?>
+<!--  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">  -->
+<!-- <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">  -->
+<div class="sitemin-content-wrapper ">
+    <div class="container-fluid">
+
+        <?php
+           include _X_MODULE . '/'. $data['tpl'];
+    	?>
+
+    </div>
+</div>
+<p><?=__FILE__;?></p>
+<?php //include _X_LAYOUT . '/sitemin/footer.phtml'; ?>
