@@ -7,7 +7,7 @@ class sitemin_model_login extends sitemin_model_user
     function current()
     {
         $r = Helper::data_get('sitemin,user');
-        $r['userrole'] = $r['userrole'] ? $r['userrole'] : 'public'; //public .none login
+        $r['userrole'] = $r['userrole'] ?? 'public'; //public .none login
         return $r;
     }
     function login($arr, $login_field = 'email')
