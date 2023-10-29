@@ -13,21 +13,21 @@
 
         ## install a modules from zip file
         # local file use relative path to "src" folder:
-        $ php exec console/module-install data/tmp/dummy.zip
+        $ php exec cli/module/install data/tmp/dummy.zip
 
 
         # local file use absolute path:
-        $ php exec console/module-install /opt/downloads/dummy.zip
+        $ php exec cli/module/install /opt/downloads/dummy.zip
 
 
         # http/https
-        $ php exec console/module-install http://my.examples.com/libraries/cs8/modules/dummy.zip
+        $ php exec cli/module/install http://my.examples.com/libraries/cs8/modules/dummy.zip
 
         # use modules name, zip file must still there in the cache folder src/data/tmp/xxxx.zip
-        $ php exec console/module-install dummy
+        $ php exec cli/module/install dummy
 
         # you can use "update" in the same way
-        $ php exec console/module-update http://my.examples.com/libraries/cs8/modules/v2/dummy.zip
+        $ php exec cli/module/update http://my.examples.com/libraries/cs8/modules/v2/dummy.zip
 
     </p>
     <ul>
@@ -46,7 +46,7 @@
     <h3>Uninstall</h3>
     <p class="code">
         ## uninstall module (* module name must match the folder name and enabled config file name)
-        $ php exec console/module-uninstall dummy
+        $ php exec cli/module/uninstall dummy
     </p>
 
     <ol>
