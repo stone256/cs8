@@ -1,5 +1,5 @@
 <?php
-class console_indexController extends _system_controller
+class cli_indexController extends _system_controller
 {
     function __construct()
     {
@@ -12,7 +12,7 @@ class console_indexController extends _system_controller
 
     protected $system_modules =  [
         "/helper",
-        '/console',
+        '/cli',
         '/welcome/example',
         '/welcome/module/enabled',
         '/welcome/module/disabled',

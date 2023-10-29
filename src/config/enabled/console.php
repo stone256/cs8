@@ -1,4 +1,0 @@
-<?php
-
-
-$modules[] = '/console';
