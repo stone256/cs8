@@ -47,14 +47,20 @@ class cli_indexController extends _system_controller
         foreach ($files  as $f) {
             include $f;
             if (in_array($module, $modules)) {
+                echo ("\nModule: $module disabled\n\n");
                 unlink($f);
-                die("\nModule: $module disabled\n\n");
+                if ($continue) {
+                    return;
+                } else {
+                    exit;
+                }
             }
         }
+        echo ("\nModule already disabled\n\n");
         if ($continue) {
             return;
         }
-        die("\nModule already disabled\n\n");
+        exit;
     }
 
 
@@ -193,7 +199,7 @@ class cli_indexController extends _system_controller
         if (file_exists($file)) {
             unlink($file);
         }
-        $cmd = "cd " . _X_MODULE . " && zip -r $file " . str_replace('/', '', $module);
+        $cmd = "cd " . _X_MODULE . " && zip -rf $file " . str_replace('/', '', $module);
         echo $r = exec($cmd);
 
         if (preg_match('/error\:/ims', $r)) {
