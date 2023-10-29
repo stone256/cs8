@@ -3,7 +3,7 @@
         'name' => 'xs/ii',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '96ac3e535a73ed1da01e1d5cf1e57255398ab311',
+        'reference' => '28c935c9f231d33d1914b729757444ccb8fa56e8',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -241,7 +241,7 @@
         'xs/ii' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '96ac3e535a73ed1da01e1d5cf1e57255398ab311',
+            'reference' => '28c935c9f231d33d1914b729757444ccb8fa56e8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

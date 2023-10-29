@@ -188,6 +188,7 @@ class console_indexController extends _system_controller
                 $renamed[$file] = $file1;
             }
         }
+
         $file = _X_TMP . "{$module}.zip";
         if (file_exists($file)) {
             unlink($file);
@@ -213,7 +214,6 @@ class console_indexController extends _system_controller
         if (file_exists("$folder/.uninstall.php")) {
             include "$folder/.uninstall.php";
         }
-
         $msg = 'zip: ' . str_replace(_X_ROOT . '/', '', $file);
         $cmd = "rm -r $folder";
         $msg .= "\n" . exec($cmd);
