@@ -199,7 +199,7 @@ class cli_indexController extends _system_controller
         if (file_exists($file)) {
             unlink($file);
         }
-        $cmd = "cd " . _X_MODULE . " && zip -rf $file " . str_replace('/', '', $module);
+        $cmd = "cd " . _X_MODULE . " && zip -r $file " . str_replace('/', '', $module);
         echo $r = exec($cmd);
 
         if (preg_match('/error\:/ims', $r)) {
