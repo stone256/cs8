@@ -13,7 +13,13 @@
 require_once __DIR__ . '/define.php';
 
 // loading local setting
-include_once _X_CONFIG . '/.local.php';
+include_once _X_CONFIG . '/local.php';
+//load project modules config
+foreach (glob(__DIR__ . "/*.conf.php") as $cf) {
+    $_config = include_once $cf;
+    $config = [...$config, ...$_config];
+}
+
 
 //set loader for app files and modules libraries
 include_once(__DIR__ . '/loader.php');

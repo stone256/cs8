@@ -5,7 +5,7 @@
  * @author 	: peter<stone256@hotmail.com>
  *
  *  place your private, or server relate settings here.
- *  .local.pgp is include in git-ignore
+ *  local.php is include in git-ignore
  */
 
 define('__X_SERVER__', 'DEV');
