@@ -250,7 +250,7 @@ class xpPdo
         $order = $this->_order($table, $order);
         $q = "select $fields from `$table` where $cond  $order limit 1";
         $rs = $this->q($q);
-        return $rs[0];
+        return $rs[0] ?? false;
     }
     /**
      * get records
@@ -422,8 +422,9 @@ class xpPdo
         if (!$arr)
             return '';
         $arr = is_array($arr) ? $arr : preg_split('/\s*\,\s*/', $arr);
+
         $arr[0] = (int) $arr[0];
-        if ($arr[1] = (int) $arr[1])
+        if ($arr[1] ?? false)
             return " LIMIT {$arr[0]},{$arr[1]}";
         return " LIMIT {$arr[0]}";
     }
@@ -571,7 +572,7 @@ class xpPdo
         if (!is_array($arr))
             return $arr; //leaf string
         foreach ($arr as $k => $v) {
-            $arr[$k] = @json_decode($v, true) ?? $v;
+            $arr[$k] = @json_decode($v ?? '', true) ?? $v;
         }
         return $arr;
     }

@@ -12,7 +12,7 @@ class helper
      */
     public static function return_url(bool $return = false): string
     {
-        $r = $_SERVER['HTTP_REFERER'];
+        $r = $_SERVER['HTTP_REFERER'] ?? '';
         $c = $_SERVER['REQUEST_URI'];
         $path = preg_replace('/^.*?\:\/\/.*?\//', '/', $r);
         if ($path == $c) {
@@ -100,7 +100,11 @@ function _request(mixed $selector = false, $value = null): mixed
 
     return $selector ? xpAS::get($data, $selector) : $data;
 }
-
+//return current url path
+function _url()
+{
+    return app::$uri;
+}
 // must defined according to cs8 model template
 //static function _factory($name, $construct_data=null){
 function _factory()

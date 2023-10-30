@@ -125,7 +125,7 @@ class xpAS
     {
         $arr = self::key($arr, $id_name);
         foreach ($arr as $k => $v) {
-            if (!$arr[$v[$parent_id_name]])
+            if (!($arr[$v[$parent_id_name]] ?? false))
                 continue;
             $arr[$v[$parent_id_name]][$child_name][] = &$arr[$k];
             $unset[] = $k;
@@ -183,7 +183,7 @@ class xpAS
     static function first(array $arr, $value = true)
     {
         if (!$value)
-            return ['value' => reset($crr), 'key' => key($crr)];
+            return ['value' => reset($arr), 'key' => key($arr)];
         return reset($arr);
     }
     /**
@@ -294,14 +294,11 @@ class xpAS
         if (!is_array($irr))
             $irr = explode($dm, $irr);
         foreach ($arr as $k => $v) {
-            $c = array();
-            foreach ($v as $ki => $vi) {
-                if (!in_array($ki, $irr))
-                    $c[$ki] = $vi;
+            if (!in_array($k, $irr)) {
+                $brr[$k] = $v;
             }
-            $brr[$k] = $c;
         }
-        return $brr;
+        return $brr ?? [];
     }
     /**
      * replace status with displayable
@@ -1001,5 +998,20 @@ class xpAS
         $str = curl_exec($ch);
         curl_close($ch);
         return $str;
+    }
+
+    /**
+     * generate password
+     */
+    static function password_generator($len = 8, $cs = null)
+    {
+        if (!$cs) $cs = '01234567890abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890~!@#$%^&*()_+=-[]{}<>,.?';
+        $cs = is_array($cs) ? $cs : str_split($cs);
+        $range = count($cs) - 1;
+        $p = '';
+        for ($i = 0; $i < $len; $i++) {
+            $p .= $cs[mt_rand(0, $range)];
+        }
+        return $p;
     }
 }

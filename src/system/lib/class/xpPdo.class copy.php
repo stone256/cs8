@@ -1,7 +1,8 @@
 <?php
 
 
-class xpPdo {
+class xpPdo
+{
 
     /** CONNECTIONS */
     static $connections = array();
@@ -12,9 +13,9 @@ class xpPdo {
     protected $statement = array();
 
     protected $credential;
-    
-    function conn($cfg = null) {
-        dd(1);
+
+    function conn($cfg = null)
+    {
         $c = self::get_default_config($cfg);
         $id = md5(json_encode($c));
         if (!self::$connections[$id]) self::$connections[$id] = new xpPDO($c, $id);
@@ -26,12 +27,14 @@ class xpPdo {
      * @param array $cfg
      * @return array of  database settings
      */
-    function get_default_config($cfg = null) {
+    function get_default_config($cfg = null)
+    {
         if (!$cfg) global $cfg;
         return $c = $cfg['db'];
     }
 
-    function __construct($c, $id) {
+    function __construct($c, $id)
+    {
         $params['cfg'] = $c;
         $params['id'] = $id ? $id : md5(json_encode($c));
         $params['host'] = $c['host'] ?? 'localhost';
@@ -47,11 +50,10 @@ class xpPdo {
         $params['log'] = xpAS::merge(array('path' => null, 'size' => 4000000), $c['log']); //logging
         //		$params['flat'] = 'json';
         $this->params = $params;
-        //make someone else handle catah error
+        //make someone else handle catch error
         try {
             $this->pdo = new PDO($params['dsn'], $params['user'], $params['password'], $params['options']);
-        }
-        catch(PDOException $e) {
+        } catch (PDOException $e) {
             //echo  'Connection failed: ' . $e->getMessage();
             //convert to general exception for caller to catch
             throw new Exception("xPDO {$params['dsn']} connection failed. " . $e->getMessage());
@@ -62,25 +64,33 @@ class xpPdo {
         $this->pdo->exec('SET CHARACTER_SET_RESULTS=utf8');
         $this->pdo->exec('SET CHARACTER_SET_CONNECTION=utf8');
     }
-
-
 }
 
-class sdsa{
+class sdsa
+{
+    public $pdo;
+    public $params;
+
+    public $last_query;
+    public $statement;
+
+    static $connections;
 
     /**
-     * close conection
+     * close connection
      *
      */
-    function disconnect() {
+    function disconnect()
+    {
         $this->pdo = null;
         self::$connections[$this->params['id']] = null;
     }
     /**
-     * get/set flat methon
+     * get/set flat method
      * @param string $json : get: false ; "json" , "serialize" , true = json , all other = 1
      */
-    function flat($type = false) {
+    function flat($type = false)
+    {
         if ($type === false) return $this->params['flat'];
         $this->params['flat'] = is_bool($type) ? "json" : (in_array($type, array("json", "serialize")) ? $type : "serialize");
     }
@@ -90,7 +100,8 @@ class sdsa{
      * @param string $prefix :  if false return current
      * @return  string
      */
-    function prefix($prefix = false) {
+    function prefix($prefix = false)
+    {
         if ($prefix == false) return $this->params['prefix'];
         return $this->params['prefix'] = $prefix;
     }
@@ -101,7 +112,8 @@ class sdsa{
      * @param string $path
      * @param int $max_size
      */
-    function log($on = false, $path = null, $max_size = 4000000) { //4mb
+    function log($on = false, $path = null, $max_size = 4000000)
+    { //4mb
         $this->params['log']['path'] = $path ? $path : '/tmp/mysql.log';
         mkdir($this->params['log']['path'], 0777, 1);
         $this->params['log']['on'] = $on;
@@ -113,7 +125,8 @@ class sdsa{
      *
      * @param string $q
      */
-    function _log($q) {
+    function _log($q)
+    {
         $this->params['last'] = $q;
         if ($this->params['log']['path']) {
             $file = $this->params['log']['path'] . '/' . $this->parems["database"] . ".log";
@@ -140,7 +153,7 @@ class sdsa{
      * @return  array  of table names
      */
 
- 
+
 
     /**
      * empty/TRUNCATE  table
@@ -160,7 +173,8 @@ class sdsa{
     /**
      * search field name
      */
-    function table_field_search($name) {
+    function table_field_search($name)
+    {
         $tables = $this->table_list();
         foreach ($tables as $kt => $vt) {
             $fields = $this->_table_fields($vt);
@@ -168,10 +182,10 @@ class sdsa{
                 switch (true) {
                     case $kf == $name:
                         $b['matched'][$vt][] = $vf;
-                    break;
+                        break;
                     case preg_match('/' . preg_quote($name) . '/', $kf):
                         $b['similar'][$vt][] = $vf;
-                    break;
+                        break;
                 }
             }
         }
@@ -182,7 +196,8 @@ class sdsa{
      *
      * @return int
      */
-    function table_field_count($table) {
+    function table_field_count($table)
+    {
         return count($this->table_fields($table));
     }
     /**
@@ -191,7 +206,8 @@ class sdsa{
      * @param  string $table
      * @return array
      */
-    function table_fields($table) {
+    function table_fields($table)
+    {
         $_table = $this->_table_name($table);
         if (!$this->params['table'][$_table]['fields']) {
             $this->table_info($table);
@@ -218,7 +234,8 @@ class sdsa{
      *     'Comment' => '',
      *    'Index_comment' => '',  )
      */
-    function table_primary_key($table) {
+    function table_primary_key($table)
+    {
         $table = $this->_table_name($table);
         $q = "SHOW KEYS FROM `$table` WHERE Key_name = 'PRIMARY' ";
         $a = $this->q($q);
@@ -231,7 +248,8 @@ class sdsa{
      * @param string/mix $con
      * @return int
      */
-    function table_count($table, $cond = null) {
+    function table_count($table, $cond = null)
+    {
         $table = $this->_table_name($table);
         $cond = $this->_condition($table, $cond);
         $q = "select count(*) as total from `$table` where $cond";
@@ -245,16 +263,16 @@ class sdsa{
      * @param string $sql
      * @return query id
      */
-    function query($q, $data = array(), $option = array()) {
+    function query($q, $data = array(), $option = array())
+    {
         $this->_log($q);
         $id = md5($q);
-        $this->lastquery = $q;
+        $this->last_query = $q;
         $this->statement[$id] = $this->statement[$id] ? $this->statement[$id] : $this->pdo->prepare($q, $option);
         $this->statement[$id]->execute($data);
         try {
             $r = $this->statement[$id]->fetchAll(PDO::FETCH_ASSOC);
-        }
-        catch(PDOException $e) {
+        } catch (PDOException $e) {
             $r = false;
         }
         return $r;
@@ -264,9 +282,10 @@ class sdsa{
      * @param string $q
      * @return array of  records
      */
-    function q($q, $raw = false) {
+    function q($q, $raw = false)
+    {
         $this->_log($q);
-        $this->lastquery = $q;
+        $this->last_query = $q;
         $rs = $this->pdo->query($q, PDO::FETCH_ASSOC);
         if ($raw) return $rs;
         foreach ($rs as $row) $rows[] = $this->_unflat($row);
@@ -281,7 +300,8 @@ class sdsa{
      * @param mix  $order : if query return multi-record
      * @return array (one row)
      */
-    function get($table, $cond = ' 1 ', $fields = '', $order = '') {
+    function get($table, $cond = ' 1 ', $fields = '', $order = '')
+    {
         $table = $this->_table_name($table);
         $cond = $this->_condition($table, $cond);
         $fields = $this->_fields($table, $fields);
@@ -316,7 +336,8 @@ class sdsa{
      * @param string $str
      * @return string
      */
-    function wildcard_sql($str) {
+    function wildcard_sql($str)
+    {
         return preg_replace('/(?<![\\\])[\?]/m', '_', preg_replace('/(?<![\\\])[\*]/m', '%', $str));
     }
     ////////////////////////////////////////
@@ -324,7 +345,7 @@ class sdsa{
     /////////////pravite method/////////////
     ////////////////////////////////////////
     ////////////////////////////////////////
-    
+
 
 
 
@@ -334,7 +355,8 @@ class sdsa{
      * @param mix $arr 	: in value
      * @return  string	: in string
      */
-    function _in($arr) {
+    function _in($arr)
+    {
         if (is_array($arr)) {
             if (count($arr) < 1) return '()';
             $arr = array_values($arr);
@@ -345,6 +367,4 @@ class sdsa{
         }
         return $arr;
     }
- 
-
 }
