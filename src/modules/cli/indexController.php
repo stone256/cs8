@@ -6,7 +6,7 @@ class cli_indexController extends _system_controller
         parent::__construct();
 
         //since all method in the class are for console only
-        $this->is_console();
+        $this->is_cli();
     }
 
 
@@ -67,7 +67,7 @@ class cli_indexController extends _system_controller
     // this is console cmd install or update
     function module_install()
     {
-        $this->is_console();
+        $this->is_cli();
 
         $q = _request();
         $zip =  $q[0] ?? '';

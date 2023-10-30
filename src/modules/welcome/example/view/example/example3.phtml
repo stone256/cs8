@@ -51,12 +51,12 @@
 
         <b class="error">Unauthorized: Access to the resource is denied.</b>
 
-        this is because in the controller we have the line <i>$this->is_console();</i>, that allows console only:
+        this is because in the controller we have the line <i>$this->is_cli();</i>, that allows console only:
         <p class="code">
             class welcome_examples_consoleController <b>extends _system_default</b> 
             public function console_command()
             {
-                <i>$this->is_console();</i>
+                <i>$this->is_cli();</i>
     
         </p>
 

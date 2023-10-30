@@ -8,21 +8,13 @@ class _system_controller
 {
     public $http_code = 200; //http_response_code(404);
 
+    protected $query;
     public function __construct()
     {
-        //
+        $this->query = _request();
     }
 
-    function _404Action()
-    {
-        return array('view' => '/.system/view/default/_404.phtml', 'data' => $this->query['query']);
-    }
-    function _500Action()
-    {
-        return array('view' => '/.system/view/default/_505.phtml', 'data' => $this->query['query']);
-    }
-
-    function is_console()
+    function is_cli()
     {
 
         if (_X_CLI_CALL ===  true) return true;
@@ -35,5 +27,12 @@ class _system_controller
 
         // Output a custom error message
         die("Unauthorized: Access to the resource is denied.");
+    }
+    function is_web()
+    {
+
+        if (_X_CLI_CALL !==  true) return true;
+        // Output a custom error message
+        die("Web call only");
     }
 }

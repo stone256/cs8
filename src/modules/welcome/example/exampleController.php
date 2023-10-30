@@ -34,7 +34,7 @@ class exampleController extends \_system_controller
 
     public function console_command()
     {
-        $this->is_console();
+        $this->is_cli();
         return _request();
     }
 
