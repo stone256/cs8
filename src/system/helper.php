@@ -26,7 +26,7 @@ class helper
 
         $r = $r ? $r : $rt;
         self::data_set('url,return,' . md5($c), $r);
-        return $r;
+        return $r ?? '';
     }
     /**
      */
