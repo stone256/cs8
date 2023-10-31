@@ -15,5 +15,10 @@
         "psr-4": {
             "modules\\": "modules/"
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "kylekatarnls/update-helper": false
+        }
     }
 }

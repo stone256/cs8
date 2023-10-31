@@ -1,6 +1,14 @@
+<div class="p7">
+    <div>
+        <?php if(!($hide_back_btn ??false)):?>
+        &langle; <a href="<?=_route('welcome');?>"> back</a>
+        <?php endif;?>
+    </div>
+</div>
 
-    <pre class="<?=$_debug ?? false ? '' :'hide';?>">
+<pre class="<?=$_debug ?? false ? '' :'hide';?>">
        <?php _d($data ?? []); ?>
     </pre>
 </body>
+
 </html>

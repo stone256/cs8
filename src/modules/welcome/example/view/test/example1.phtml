@@ -1,12 +1,7 @@
 <?php include _layout() . '/header.phtml';?>
-<div class="main">
-    <h1>Welcome CS8</h1>
-</div>
 <h2>Example1 - route with prefix, post and pre processor </h2>
 <div class="p8">
-    <p>
-        &langle; <a href="<?=_route('welcome');?>"> back</a>
-    </p>
+
     <b>modules/welcome/example/.route.php</b>
     <p class="code">
         &lt;php
@@ -57,7 +52,8 @@
         <dt>->after(['welcome_model@json']);</dt>
         <dd>post processors, same as pre-processors</dd>
         <dt>*note</dt>
-        <dd>you can not mix use of string type and class type routing for one controller. but can mix them for different
+        <dd>you can not mix use of string type and class type routing for one controller. but can mix them for
+            different
             controllers</dd>
     </dl>
     <pre>

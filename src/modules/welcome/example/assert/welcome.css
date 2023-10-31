@@ -48,8 +48,16 @@ h2 {
     font-weight: 800;
     color:#000;
 }
+.p7 {
+    padding:0 80px;
+}
+.p7 > div {
+    text-align:right;
+    padding:0 44px 20px 0;
+    border-top:dotted 1px #888;
+}
 .p8 {
-    padding:40px 80px;
+    padding:20px 80px;
 }
 dt {
     font-weight: 800;

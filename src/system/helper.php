@@ -170,6 +170,14 @@ function _assert($assert, $module_name = false)
     return $path . '/' . $assert;
 }
 
+function _assert_url($assert, $module_name = null, $ver = null)
+{
+    $module_name = $module_name ?? routing()->matched('module');
+    $ver = $ver ?? "1.0";
+    $ver = $ver == -1 ? mt_rand() : $ver;
+    return _route('assert', ['module' => $module_name, 'assert' => $assert, 'version' => $ver]);
+}
+
 // return module layout folder 
 function _layout($module_name = false)
 {
@@ -245,7 +253,7 @@ function _time()
     return microtime(1) - _X_START_TIME;
 }
 // show and die
-function dd($x)
+function _dd($x)
 {
     return _d($x, 1);
 }

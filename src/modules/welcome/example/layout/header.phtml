@@ -9,8 +9,14 @@
   <meta http-equiv="Expires" content="0" />
 
   <title>welcome | cs8</title>
-  <link rel="stylesheet" type="text/css"
-    href="<?=_route('assert', ['module'=>'welcome_example','assert'=>'welcome.css', 'version'=>1]);?>">
+  <link rel="stylesheet" type="text/css" href="<?=_assert_url('welcome.css', 'welcome_example');?>">
 </head>
 
 <body>
+  <div class="main">
+    <?php if($index_page ?? false): ?>
+    <h1>Welcome CS8</h1>
+    <?php else: ?>
+    <h1><a href="<?=_route('welcome');?>">Welcome CS8</a></h1>
+    <?php endif ?>
+  </div>

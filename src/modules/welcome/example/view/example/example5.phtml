@@ -1,12 +1,8 @@
 <?php include _layout() . '/header.phtml';?>
-<div class="main">
-    <h1>Welcome CS8</h1>
-</div>
+
 <h2>Example - folder structure</h2>
 <div class="p8">
-    <p>
-        &langle; <a href="<?=_route('welcome');?>"> back</a>
-    </p>
+
     <pre class="structure">
       <span class="folder">[src]</span>
         &#9474; 
@@ -45,7 +41,7 @@
         &#9474;      &#9474;
         &#9474;      &#9500;&#9472;&#9472;&#9472;<span class="file">indexController.php</span> # controller file 
         &#9474;      &#9474;
-        &#9474;      &#9500;&#9472;&#9472;&#9472;<span class="folder">[assert]</span> # store such as css, js, image, video pdf... and used like: _route('assert', ['module'=>'welcome_example','assert'=>'welcome.css', 'version'=>1.09]);  
+        &#9474;      &#9500;&#9472;&#9472;&#9472;<span class="folder">[assert]</span> # store such as css, js, image, video pdf... and used like: _assert_url('welcome.css', 'welcome_example', 1.09);  
         &#9474;      &#9474;
         &#9474;      &#9500;&#9472;&#9472;&#9472;<span class="folder">[layout]</span> # layout files of the module 
         &#9474;      &#9474;
