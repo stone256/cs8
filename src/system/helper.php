@@ -44,6 +44,23 @@ class helper
         $path = '_app_data,' . $path;
         return xpAS::get($_SESSION, $path);
     }
+
+    /**
+     * ajax batching helper
+     * start index start from 0;
+     * if total =12 block size=4
+     *  block: 0-3; 4-7; 8-11;
+     */
+    public static function batch($batch)
+    {
+        if (!$batch['total']) return false;
+        $batch['size'] = $batch['size'] ? $batch['size'] : 1;
+        $batch['start'] = $batch['start'] ? $batch['start'] : 0;
+        $batch['end'] = min($batch['total'] - 1,  $batch['start'] + $batch['size']  - 1);
+        $ret = array('status' => $batch['end'] >= $batch['total'] - 1 ? 'end' : 'next');
+        $batch['next'] = $batch['end']  + 1;
+        return xpAS::merge($batch, $ret);
+    }
 }
 
 

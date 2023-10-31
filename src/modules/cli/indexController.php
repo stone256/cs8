@@ -18,6 +18,10 @@ class cli_indexController extends _system_controller
         '/welcome/module/disabled',
     ];
 
+    function routes()
+    {
+        return routing()->list();
+    }
     function module_list()
     {
         return print_r(_module(), JSON_PRETTY_PRINT);

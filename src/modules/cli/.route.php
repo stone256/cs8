@@ -15,4 +15,6 @@ routing([
     '/module/uninstall' => 'cli/index@module_uninstall',
     '/module/zip' => 'cli/index@module_zip',
 
+    '/routes/list' => 'cli/index@routes'
+
 ])->prefix('/cli');
