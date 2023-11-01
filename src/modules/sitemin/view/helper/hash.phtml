@@ -1,0 +1,56 @@
+<br><br>
+<div class="row justify-content-center">
+        <div class="modal-content col-6">
+                <div class="modal-header  login-logo">
+                        <h3 class="">QR Code Generator</h3>
+                </div>
+                <div class="modal-body text-center">
+                        <form method="post" role="form" class="form-horizontal ">
+                                <?php if ($data['msg'] ?? false ): ?>
+                                <div class="
+                                        <?=$data['code-error']; ?>">
+                                        <strong>Warning!</strong>
+                                        <?=$data['msg']; ?>
+                                </div>
+                                <?php endif; ?>
+                                <br><br>
+                                <input type="text" placeholder="Hints" required="" name="hints"
+                                        class="form-control input-lg" id="hints">
+                                <br />
+                                <label><input type="checkbox" name="short" checked="true" value="1" id="short"> Short
+                                </label>
+                                &nbsp;
+                                <br />
+                                <!--		<div class="g-recaptcha" data-sitekey="6LfRdQgTAAAAAESeqvmrGg9BRLiMmqR7kKeP7DqL"></div>	-->
+                                &nbsp;
+                                <br />
+                                </label>
+                                <label for="save" class="hidden-xs">&nbsp;</label>
+                                <button type="button" value="1" name="save" class="btn btn-lg btn-alert"
+                                        onclick="pawwsordgenerate(this.form)" id="save">
+                                        <span>Generate</span>
+                                </button>
+                        </form>
+                        <br />
+                        <br />
+                        <label for="password">HASH</label>
+                        <input readonly type="text" placeholder="" required="" name="password"
+                                class="form-control input-lg" id="password">
+                        <br>
+                        <br>
+
+                </div>
+        </div>
+</div>
+
+<script>
+        function pawwsordgenerate(form) {
+                $.ajax({
+                        url: '<?=_route("sitemin.helper.hash");?>',
+                        data: { hint: $('#hints').val(), save: 1/*,"g-recaptcha-response":$('#g-recaptcha-response').val()*/, short: $('#short').is(":checked") ? 1 : 0 },
+                        success: function (ret) {
+                                $('#password').val(ret)
+                        }
+                });
+        }
+</script>

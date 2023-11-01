@@ -1,0 +1,63 @@
+<div class="container-fluid">
+	<div class="row">
+		<h4 class="col-md-12">&nbsp;</h4>
+	</div>
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<h3>Batch Example</h3>
+			<form class="form-inline" action="/action_page.php">
+				<div class="form-group">
+					<label for="total">Total Entries:</label>
+					<input type="number" class="form-control" id="total" placeholder="Total enteies" min="20" max="100"
+						name="total" value=50>
+					<label for="block">Block Size:</label>
+					<input type="number" class="form-control" id="block" placeholder="Block size" min="1" max="5"
+						name="block" value="4">
+
+					<button type="button" class="btn btn-primary fr" onclick="run(0)">Run</button>
+				</div>
+			</form>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+	<div class="row">
+		<h6 class="col-md-12">&nbsp;</h6>
+	</div>
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<p class=" CODE status  Hide max-h-300 "></p>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+</div>
+<script>
+	function run(i) {
+		if (!i) $('.status').fadeIn().html('<h3 class="_Yellow">Batch Started</h3><img class="loading" src="<?=_assert_url("img~loader-294.gif");?>" >');
+		$.ajax({
+			dataType: 'json',
+			data: { save: 1, index: i, total: $('#total').val(), 'size': $('#block').val() },
+			success: function (ret) {
+				$('.loading').remove();
+				$('.status').show().append('<div>' + ret.msg + '</div>');
+				if (ret.status != 'end') {
+					setTimeout(function () { run(ret.next); }, 1);
+					$('.status').append('<img class="loading" src="<?=_assert_url("img~loader-294.gif");?>" >');
+
+				} else {
+					$('.status').append('<h3 class="_Yellow">Batch Finished.</h3>');
+				}
+				var scrollableDiv = $(".max-h-300");
+				var scrollHeight = scrollableDiv.prop("scrollHeight");
+				scrollableDiv.animate({ scrollTop: scrollHeight }, "fast");
+			}
+		});
+	}
+</script>
+<style>
+	.max-h-300 {
+		max-height: 300px;
+		overflow-y: scroll;
+	}
+</style>

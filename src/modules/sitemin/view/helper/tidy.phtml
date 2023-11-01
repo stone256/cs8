@@ -1,0 +1,61 @@
+<br><br>
+<div class="row justify-content-center">
+        <div class="modal-content col-6 ">
+                <div id="time-bar3" data-time="30"></div>
+                <div class="modal-header  login-logo">
+                        <div class="row">
+                                <h3 class="">HTML TIDY</h3>
+                                <br>
+                                <div class="col-md-12 " width="100%">* this required php-tidy installed(sudo apt install
+                                        php-tidy libtidy-dev.. don't forget restart apache server)</div>
+                                <div class="text-center col-md-12 ">
+                                        <textarea width="100%" rows="6" placeholder="contents" required="" name="con"
+                                                class="form-control input-lg" id="con"></textarea>
+                                </div>
+                                <div class="text-center col-md-12 ">
+                                        </br>
+                                </div>
+                                <div class="text-center col-md-12 ">
+                                        <button type="button" value="1" name="save" class="btn btn-lg btn-alert"
+                                                onclick="HTMLDITY()" id="save">
+                                                <span>Tidy</span>
+                                        </button>
+                                        <button class=" copyit btn btn-lg btn-warning" onclick="myFunction()"><span>Copy
+                                                        to clipboard</span></button>
+                                </div>
+                                <br /><br class="clear" />
+                        </div>
+
+
+                </div>
+                <div class="row">
+                        <textarea class=" status Hide form-control input-lg" width="100%" rows="10"></textarea>
+
+                </div>
+
+        </div>
+</div>
+
+
+<script>
+        function myFunction() {
+                var copyText = $('.status')[0];
+                copyText.select();
+                copyText.setSelectionRange(0, 99999)
+                document.execCommand("copy");
+                alert("Copied");
+        }
+
+        function HTMLDITY(form) {
+                $.ajax({
+                        method: 'post',
+                        data: { con: $('#con').val(), save: 1/*,"g-recaptcha-response":$('#g-recaptcha-response').val()*/ },
+                        success: function (ret) {
+                                $('.status').addClass('CODE').val(ret).fadeIn();
+                                $('.copyit').show();
+                        }
+                });
+        }
+
+        $('.copyit').hide();
+</script>
