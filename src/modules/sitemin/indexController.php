@@ -15,13 +15,13 @@ class sitemin_indexController extends _system_controller
         $u = helper::data_get('sitemin,user');
         if (!($route = ($u['route'] ?? false))) {
             //helper::data_get('sitemin,user,route');
-            $menu = _factory('sitemin_model_acl_menu')->allowed($u['user_role']);
+            $menu = _factory('sitemin_model_acl_menu')->allowed($u['user_role'] ?? []);
             helper::data_set('sitemin,user,menu', $menu);
-            $route = _factory('sitemin_model_acl_route')->allowed($u['user_role']);
+            $route = _factory('sitemin_model_acl_route')->allowed($u['user_role'] ?? []);
             helper::data_set('sitemin,user,route', $route);
             $this->route = $route;
         }
-        if (_X_CLI_CALL !== true && !$route[$_p]) xpAS::go(_X_URL . DS . 'sitemin' . DS . 'login');
+        if (_X_CLI_CALL !== true && !($route[$_p] ?? false)) xpAS::go(_route('sitemin.login'));
         $this->sitemin_menu = _factory('sitemin_model_acl_menu')->tree();
         if (_factory('sitemin_model_var')->get('sitemin/log') && $_p != '/sitemin/keepalive') _factory('sitemin_model_log')->insert();
     }

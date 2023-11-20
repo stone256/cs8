@@ -55,7 +55,7 @@ class sitemin_model_acl_route
     {
         $r = xpTable::load($this->table)->get(array('route' => $route));
         $roles = preg_replace('/\,\s*$/ims', '', $roles);
-        $roles = preg_split('/\s*\,\s*/ims', $roles);
+        $roles = is_array($roles) ? $roles : preg_split('/\s*\,\s*/ims', $roles);
         foreach ($roles as $k => $v) {
             if (!($v1 = trim($v))) continue;
             $pattern = '/(^|\,)' . preg_quote($v1) . '(\,|$)/ims';

@@ -111,6 +111,6 @@ class sitemin_model_acl_menu
             $route = preg_replace('/\?.*$/ims', '', $vm['route'] ?? '');
             if (_factory('sitemin_model_acl_route')->check($roles, $route)) $rr[$vm['route']] = $vm['route'];
         }
-        return $rr;
+        return $rr ?? '';
     }
 }

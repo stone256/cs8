@@ -4,7 +4,7 @@ class sitemin_varController extends sitemin_indexController
     function index()
     {
         $q = $this->query;
-        if (($q['cmd'] ?? false) && _csrf($q['_token'] ?? false)) {
+        if (($q['cmd'] ?? false) && _csrf($q['_token'] ?? '', 'system.var')) {
 
             switch ($q['cmd']) {
                 case 'list':
@@ -17,7 +17,7 @@ class sitemin_varController extends sitemin_indexController
                     break;
             }
         }
-        $res['_token'] = _csrf();
+        $res['_token'] = _csrf(false, 'system.var');
 
         $res['TITLE'] = 'SITEMIN SETTING';
         $res['NAME'] = 'system var';

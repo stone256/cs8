@@ -66,11 +66,12 @@ class helper
 
 /** common functions */
 // create new token or check token
-function _csrf(bool | string  $token = false): bool | string
+function _csrf(bool | string  $token = false, $name = false): bool | string
 {
-    return $token
-        ? ($token == helper::data_get('_csrf') && $token)
-        : helper::data_set('_csrf', sha1(uniqid()));
+    $path = $name ? '_csrf.' . $name : '_csrf';
+    return $token === false
+        ? helper::data_set($path, sha1(uniqid()))
+        : ($token == helper::data_get($path) && $token);
 }
 
 

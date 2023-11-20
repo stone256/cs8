@@ -24,6 +24,8 @@ routing([
     'helper/myip' => 'sitemin/helper@myip|sitemin.helper.myip',
     'helper/tidy' => 'sitemin/helper@tidy|sitemin.helper.tidy',
 
+    'user' => '/sitemin/user@list|sitemin.user.list',
+    'user/password' => '/sitemin/user@password|sitemin.user.password',
     'user/message' => '/sitemin/user@message|sitemin.user.message',
 
 

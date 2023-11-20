@@ -80,32 +80,32 @@ class sitemin_model_user
     function gets($q = array())
     {
         $q = xpAS::escape(xpAS::trim($q));
-        if ($q['filter']['username']) $search[] = "username like  '%{$q['filter']['username']}%' ";
-        if ($q['filter']['email']) $search[] = " email like '%{$q['filter']['email']}%' ";
-        $rs = xpTable::load($this->user_table)->get($search, 'COUNT(*) as c');
+        if ($q['filter']['username'] ?? false) $search[] = "username like  '%{$q['filter']['username']}%' ";
+        if ($q['filter']['email'] ?? false) $search[] = " email like '%{$q['filter']['email']}%' ";
+        $rs = xpTable::load($this->user_table)->get($search ?? [], 'COUNT(*) as c');
         $count = $rs['c'];
         //calculate page and limit
         $page['total'] = $count;
-        $page['length'] = $q['page_length'] ? $q['page_length'] : 6;
+        $page['length'] = $q['page_length'] ?? 6;
         $page['pagination_max_length'] = 10;
         $page['pages'] = ceil($count / $page['length']);
-        $page['no'] = max(1, min($page['pages'], ((int)$q['currentpage'] ? (int)$q['currentpage'] : 1)));
+        $page['no'] = max(1, min($page['pages'], (int)($q['currentpage'] ?? 1)));
         $page['current_shows'] = ceil($page['no'] / $page['pagination_max_length']); // 1...xxx
         $page['current_shows_length'] = min(min($page['pages'], ($page['current_shows']) * $page['pagination_max_length']) - ($page['current_shows'] - 1) * $page['pagination_max_length'], $page['pagination_max_length']);
         $page['omit'] = $page['pages'] > $page['pagination_max_length'];
         $page['backward'] = $page['current_shows'] > 1;
         $page['forward'] = $page['current_shows'] * $page['pagination_max_length'] < $page['pages'];
-        $order = $q['sort'];
+        $order = $q['sort'] ?? '';
         $limit = (($page['no'] - 1) * $page['length']) . ",{$page['length']} ";
-        $rs['data'] = xpTable::load($this->user_table)->gets($search, '*', $order, $limit);
+        $rs['data'] = xpTable::load($this->user_table)->gets($search ?? [], '*', $order, $limit);
         foreach ($rs['data'] as $k => $v) {
             $roles = xpTable::load($this->role_table)->gets(array('sitemin_id' => $v['id']), 'acl_role_id', 'acl_role_id');
             $role_ids = xpAS::get($roles, '*,acl_role_id');
             $_r = _factory('sitemin_model_acl_role')->gets(array('id' => $role_ids));
-            $rs['data'][$k]['user_role'] = implode(',', xpAS::get($_r, 'data,*,name'));
+            $rs['data'][$k]['user_role'] = implode(',', xpAS::get($_r, 'data,*,name') ?? []);
         }
-        $rs['filter'] = $q['filter'];
-        $rs['sort'] = $q['sort'];
+        $rs['filter'] = $q['filter'] ?? ['username' => '', 'email' => ''];
+        $rs['sort'] = $q['sort'] ?? '';
         $rs['page'] = $page;
         return $rs;
     }

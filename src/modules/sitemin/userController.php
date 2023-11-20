@@ -1,15 +1,10 @@
 <?php
-class sitemin_userController //extends sitemin_indexController
+class sitemin_userController extends sitemin_indexController
 {
-
-
-
-
-
 
     function message()
     {
-        $q = $_REQUEST;
+        $q = $this->query;
         switch ($q['cmd']) {
             case 'lead':
                 $rm = _factory('sitemin_model_message')->lead();
@@ -23,6 +18,34 @@ class sitemin_userController //extends sitemin_indexController
                 die('ok');
         }
     }
+
+
+    function list()
+    {
+        $q = $this->query;
+
+        $res = _factory('sitemin_model_user')->gets($q);
+
+        $res['TITLE'] = 'SITEMIN';
+        $res['NAME'] = 'USER';
+        $res['route'] = routing()->matched();
+        $res['_token'] = _csrf();
+
+        $res['tpl'] = $res['route']['view'] . '/user/list.phtml';
+        return ['view' => $res['route']['view'] . '/index.phtml', 'data' => $res];
+    }
+
+    function password()
+    {
+        $q = $this->query;
+        if (_csrf($q['_token'] ?? false) && $q['id']) {
+            _factory('sitemin_model_user')->setpassword($q);
+        }
+        die('done');
+    }
+
+
+
 
 
 
@@ -45,15 +68,7 @@ class sitemin_userController //extends sitemin_indexController
         }
     }
 
-    function listAction()
-    {
-        $q = $_REQUEST;
-        $rs = _factory('sitemin_model_user')->gets($q);
-        $rs['tpl'] = 'user/_user.phtml';
-        $rs['_token'] = defaultHelper::page_hash_set('sitemin,user,list');
-        $rs['TITLE'] = 'SITEMIN USER LIST';
-        return array('view' => '/sitemin/view/index.phtml', 'data' => array('rs' => $rs));
-    }
+
     function suspendAction()
     {
         $q = $this->q;
@@ -74,16 +89,7 @@ class sitemin_userController //extends sitemin_indexController
         }
         return defaultHelper::return_url(true);
     }
-    function passwordAction()
-    {
-        $q = $this->q;
-        defaultHelper::return_url();
-        $_token = defaultHelper::page_hash_get('sitemin,user,list');
-        if ($q['_token'] == $_token && $q['id']) {
-            _factory('sitemin_model_user')->setpassword($q);
-        }
-        die('done');
-    }
+
     function editAction()
     {
         $q = $this->q;
