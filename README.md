@@ -1,21 +1,21 @@
-
-# 🚀 WHAT IS and NOT
+# 🚀 WHAT IS / WHAT IS NOT
 
 > A simple, fast, and minimal PHP framework.  
-> **Philosophy**: Write less code, achieve more.
+> **Philosophy:** Write less code, achieve more.
 
 ---
 
 ## 📜 License
 **MIT License** – Free to use, modify, and distribute.  
-🔗 [Read more about MIT License](https://en.wikipedia.org/wiki/MIT_License)
+🔗 https://en.wikipedia.org/wiki/MIT_License
 
 ---
 
 ## ⚙️ Requirements
+
 | Requirement | Details |
-|-------------|---------|
-| **PHP** | Version ≥ 8.0 |
+|------------|--------|
+| **PHP** | ≥ 8.0 |
 | **Extensions** | `PDO` (required only for `sitemin` and `api` modules) |
 | **Database** | MySQL (via PDO) |
 
@@ -24,170 +24,314 @@
 ## 📐 Naming Conventions
 
 ### 🔹 PHP (Backend)
+
 | Type | Convention | Example |
-|------|-----------|---------|
+|------|-----------|--------|
 | Public variables | `snake_case` | `$nick_name` |
-| Local/Private variables | Prefix with `_` | `$_name` *(optional)* |
+| Local/Private variables | Prefix with `_` (optional) | `$_name` |
+
+---
 
 ### 🔹 Folders & Files
+
 | Type | Convention | Example |
-|------|-----------|---------|
+|------|-----------|--------|
 | Folders | `kebab-case` | `local-folder/storage/css/new-css-2024/` |
-| CSS Files | `kebab-case` | `new-css-2024.css` |
+| CSS files | `kebab-case` | `new-css-2024.css` |
+
+---
 
 ### 🔹 Frontend
-- Follow **Bootstrap** / **jQuery** standards.
+- Follow **Bootstrap** / **jQuery** conventions.
+
+---
 
 ### 🔹 JavaScript
+
 | Type | Convention | Example |
-|------|-----------|---------|
+|------|-----------|--------|
 | Global variables | `snake_case` | `var server_name` |
-| Local/Private variables | Prefix with `_` or short names | `_name`, `i`, `j`, `k`, `m` |
-| Results/Response | Short aliases | `rs` = results/rows/response, `r` = record/row |
+| Local/Private variables | `_` prefix or short names | `_name`, `i`, `j`, `k` |
+| Results/Response | Short aliases | `rs` (results), `r` (row) |
+
+---
 
 ### 🔹 HTML & CSS
+
 | Type | Convention | Example |
-|------|-----------|---------|
-| `id` / `class` attributes | `kebab-case` + optional suffix | `abc-def-0t` |
-| CSS selectors | Same as HTML | `.abc-def-0t` |
+|------|-----------|--------|
+| `id` / `class` | `kebab-case` (+ optional suffix) | `abc-def-0t` |
+| CSS selectors | Match HTML | `.abc-def-0t` |
 
 ---
 
 ## 🐳 Running Locally with Docker
 
-            cd dockers
-            docker-compose up -d --remove-orphans
+```bash
+cd dockers
+docker-compose up -d --remove-orphans
+````
 
-- port 8058
-- set folder ./src to /var/www (of container)
+* Default port: **8058**
+* Map `./src` → `/var/www` (inside container)
 
-- also check docker network
-            # Connect to PostgreSQL container
-            docker network connect docker_default csp8
+### Docker Network Setup
 
-            # Connect to MySQL container  
-            docker network connect bridge csp8
+```bash
+# Connect to PostgreSQL container
+docker network connect docker_default csp8
 
-- start container terminal use docker-desktop
+# Connect to MySQL container
+docker network connect bridge csp8
+```
 
+* Use Docker Desktop to access container terminal if needed.
 
-# INSTALLATION
+---
 
-- clone or just download to your project folder
+## 📦 Installation
 
-# USAGE
+Clone the repository:
 
-## Before your start:
+```bash
+git clone git@bitbucket.org:petertwa/cs-p8.git
+```
 
-- under your project folder,
+---
 
-  - copy "config/general.sample" to "config/general.php"
-  - copy "config/local.sample" to "config/local.php"
+## 🛠️ Usage Guide
 
-- to enable vendor under .package/:
-  - uncommet the line in "config/general.php"
-  -       define('_LOAD_VENDOR', true);
+### 🔧 Initial Setup
 
-## Enter point for WEB
+Inside your project folder:
 
-- web call is handled by "public/index.php"
-- so please point your document-root here
-- e.g. http://www.myproject.roo -> .../my-project/public
+* Copy config templates:
 
-## Enter point - CLI
+  * `config/general.sample` → `config/general.php`
+  * `config/local.sample` → `config/local.php`
 
-- CLI call is handled by file "x2cli" under the project folder
-- $php x2cli [ROUTER] [PARAMETERS]
-  - e.g.
-  -       $/var/www/my-project/php x2cli foo/bar id=5\&date=2008-11-11
+* Enable vendor loading (optional):
 
-## Config files
+```php
+define('_LOAD_VENDOR', true);
+```
 
-- general: "config/general.php"
-- local: "config/local.php"
-- cli: "config/x2cli.php" - extra for cli
+---
 
-## Enabling module
+## 🌐 Web Requests
 
-- "config/enabled/YOURMODULE.php"
-- e.g. "config/enabled/foo.php"
--       $modules[] = "/foo";
+* Entry point: `public/index.php`
+* Set your web server document root to:
 
-## Overwriting model
+```
+/your-project/public
+```
 
-- "config/overwrite/MODEL_2_NEWMODEL.php"
-- e.g. "config/enabled/foo_model_2_bar_model.php"
-  -       $overwrites['foo_model']= 'bar_model';
-- note: this only works with "\_factory('xxx')" - factory-singleton
+Example:
 
-## Module structure
+```
+http://www.myproject.root → /my-project/public
+```
 
-    module/
-    └── YOURMODULE/          # e.g., module/foo/
-        ├── .router.php      # Router definitions
-        ├── indexController.php
-        └── view/
-            └── controller/
-                └── method.phtml  # e.g., view/index/bar.phtml
+---
 
+## 💻 CLI Requests
 
-## -View
+* Entry file: `x2cli`
 
-- "module/YOURMODEL/view/[controller]/[method].phtml"
-- e.g. "module/foo/view/index/bar.phtml"
+```bash
+php x2cli [ROUTER] [PARAMETERS]
+```
 
-## -Router mapping
+Example:
 
-- router file is under your module path, wihch defined when you put in your enabled module
-- e.g. $modules[] = "/foo";
-- router file is : "foo/.router.php
--         $routers = array(
-      		  #"FRONT-URI" => "MODULEPATH/CONTROLLERNAME@METHODNAME"
-      		  "/foo/bar" => "/foo/index@bar",
-          );
+```bash
+php x2cli foo/bar id=5\&date=2008-11-11
+```
 
-## -Controller
+---
 
-- controller is defined in the router file
-- e.g. "/foo/bar" => "/foo/index@bar",
--      "foo/indexController.php"
-          ..
-          function barAction(){
-                  ..
-          }
-          ..
+## ⚙️ Configuration Files
 
-## Packagem and library
+| Type    | File                 |
+| ------- | -------------------- |
+| General | `config/general.php` |
+| Local   | `config/local.php`   |
+| CLI     | `config/x2cli.php`   |
 
-1. composed PACKAGE :
-   - folder ".package/\_vendor"
-2. just use lazyloader:
-   - folder ".package/\_lib/\*"
+---
 
-- _xs framework requires ".package/xp/_"
+## 🔌 Enabling Modules
 
-## Layout
+Create:
 
-- folder: "layout/"
-  - this is recommand common layout files, but not enforced.
+```
+config/enabled/YOURMODULE.php
+```
 
-## Data storage
+Example:
 
-- folder "data/\*"
+```php
+$modules[] = "/foo";
+```
 
-## System core
+---
 
-- folder ".system/\*"
+## 🔁 Model Overwriting
 
-## Public
+```
+config/overwrite/MODEL_2_NEWMODEL.php
+```
 
-- folder "public"
-  - MEDIA, JS.. .. ..
-  - ..
-  - "index.php" #system file donot touch unless you know what you doing.
-  - ".htaccess" #system file donot touch unless you know what you doing.
-  - "maintenance.html" #for maintenance model [option]
-  - "robots.txt" #robot file [option]
+Example:
 
+```php
+$overwrites['foo_model'] = 'bar_model';
+```
 
-## Git git@bitbucket.org:petertwa/cs-p8.git
+⚠️ Only works when using `_factory('xxx')` (factory + singleton pattern).
+
+---
+
+## 📁 Module Structure
+
+```
+module/
+└── YOURMODULE/
+    ├── .router.php
+    ├── indexController.php
+    └── view/
+        └── controller/
+            └── method.phtml
+```
+
+---
+
+## 👁️ Views
+
+```
+module/YOURMODULE/view/[controller]/[method].phtml
+```
+
+Example:
+
+```
+module/foo/view/index/bar.phtml
+```
+
+---
+
+## 🧭 Router Mapping
+
+Defined in `.router.php`:
+
+```php
+$routers = array(
+    "/foo/bar" => "/foo/index@bar",
+);
+```
+
+---
+
+## 🎮 Controllers
+
+Defined via router mapping:
+
+```
+module/foo/indexController.php
+```
+
+```php
+function barAction() {
+    // ...
+}
+```
+
+---
+
+## 📦 Packages & Libraries
+
+1. Composer-style packages:
+
+```
+.package/_vendor
+```
+
+2. Lazy-loaded libraries:
+
+```
+.package/_lib/*
+```
+
+* Core dependency:
+
+```
+.package/xp/_
+```
+
+---
+
+## 🎨 Layout
+
+Recommended (not required):
+
+```
+layout/
+```
+
+---
+
+## 💾 Data Storage
+
+```
+data/*
+```
+
+---
+
+## ⚙️ System Core
+
+```
+.system/*
+```
+
+---
+
+## 🌍 Public Directory
+
+```
+public/
+├── index.php          # DO NOT modify unless necessary
+├── .htaccess          # DO NOT modify unless necessary
+├── maintenance.html   # optional
+├── robots.txt         # optional
+```
+
+---
+
+## 📝 Notes
+
+* ✅ Keep `public/index.php` and `.htaccess` untouched unless necessary.
+* ✅ Use `_factory()` for model instantiation (enables overriding).
+* ✅ Follow naming conventions for autoloading compatibility.
+
+---
+
+## 💡 Tip
+
+Start by exploring:
+
+```
+module/example/
+```
+
+(if available) for a working reference.
+
+```
+
+---
+
+If you want next step, I can:
+- compress this into a **1-page ultra minimal README**
+- or upgrade it into a **professional docs (like Laravel style)**
+```
