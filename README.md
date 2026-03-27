@@ -55,8 +55,7 @@
 
 ## 🐳 Running Locally with Docker
 
-```bash
-cd dockers
+            cd dockers
             docker-compose up -d --remove-orphans
 
 - port 8058
