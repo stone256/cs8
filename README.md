@@ -1,57 +1,73 @@
 
-# WHAT IS
+# 🚀 WHAT IS and NOT
 
-cs framework is simple and fast php framework with minimum code. Idea for if you do not want write tons of code
+> A simple, fast, and minimal PHP framework.  
+> **Philosophy**: Write less code, achieve more.
 
-# LICENCE FREE MIT
+---
 
-[https://en.wikipedia.org/wiki/MIT_License]
+## 📜 License
+**MIT License** – Free to use, modify, and distribute.  
+🔗 [Read more about MIT License](https://en.wikipedia.org/wiki/MIT_License)
 
-# REQUIREMENTS
+---
 
-- PHP >= 8
-- Pdo Extension for mysql, only for sitemin and api
+## ⚙️ Requirements
+| Requirement | Details |
+|-------------|---------|
+| **PHP** | Version ≥ 8.0 |
+| **Extensions** | `PDO` (required only for `sitemin` and `api` modules) |
+| **Database** | MySQL (via PDO) |
 
+---
 
+## 📐 Naming Conventions
 
-# NAMING:
+### 🔹 PHP (Backend)
+| Type | Convention | Example |
+|------|-----------|---------|
+| Public variables | `snake_case` | `$nick_name` |
+| Local/Private variables | Prefix with `_` | `$_name` *(optional)* |
 
-## -All php backend
-- public var name as  $nick_name 
-- local/private $_name [option]
-## -All folder 
-- local-folder/storage/css/new-css-2024
+### 🔹 Folders & Files
+| Type | Convention | Example |
+|------|-----------|---------|
+| Folders | `kebab-case` | `local-folder/storage/css/new-css-2024/` |
+| CSS Files | `kebab-case` | `new-css-2024.css` |
 
+### 🔹 Frontend
+- Follow **Bootstrap** / **jQuery** standards.
 
-## -Frontend 
-- follow bootstrap/jquery
+### 🔹 JavaScript
+| Type | Convention | Example |
+|------|-----------|---------|
+| Global variables | `snake_case` | `var server_name` |
+| Local/Private variables | Prefix with `_` or short names | `_name`, `i`, `j`, `k`, `m` |
+| Results/Response | Short aliases | `rs` = results/rows/response, `r` = record/row |
 
-## -JS
-- var server_name
-- private/local _name or js i,j,k,m ....
-- rs short for results or rows  or response
-- r short for record or row
-## -HTML
-- attribute id, class ... always like abc-def-0t 
-## -CSS
-- .abc-def-0t
+### 🔹 HTML & CSS
+| Type | Convention | Example |
+|------|-----------|---------|
+| `id` / `class` attributes | `kebab-case` + optional suffix | `abc-def-0t` |
+| CSS selectors | Same as HTML | `.abc-def-0t` |
 
+---
 
+## 🐳 Running Locally with Docker
 
-
-# Running in local docker
-
+```bash
 cd dockers
-docker-compose up -d --remove-orphans
+            docker-compose up -d --remove-orphans
+
 - port 8058
 - set folder ./src to /var/www (of container)
 
 - also check docker network
-  - #this allow to docker postgres-db 
-  - docker network connect docker_default csp8
+            # Connect to PostgreSQL container
+            docker network connect docker_default csp8
 
-  - #this allow to docker mysql 
-  - docker network connect bridge csp8
+            # Connect to MySQL container  
+            docker network connect bridge csp8
 
 - start container terminal use docker-desktop
 
@@ -75,13 +91,13 @@ docker-compose up -d --remove-orphans
 
 ## Enter point for WEB
 
-- are handled by "public/index.php"
+- web call is handled by "public/index.php"
 - so please point your document-root here
 - e.g. http://www.myproject.roo -> .../my-project/public
 
 ## Enter point - CLI
 
-- are handled by file "x2cli" under the project folder
+- CLI call is handled by file "x2cli" under the project folder
 - $php x2cli [ROUTER] [PARAMETERS]
   - e.g.
   -       $/var/www/my-project/php x2cli foo/bar id=5\&date=2008-11-11
@@ -105,10 +121,16 @@ docker-compose up -d --remove-orphans
   -       $overwrites['foo_model']= 'bar_model';
 - note: this only works with "\_factory('xxx')" - factory-singleton
 
-## Module
+## Module structure
 
-- "module/YOURMODULE" #all module have to be in there!
-- e.g. "module/foo"
+    module/
+    └── YOURMODULE/          # e.g., module/foo/
+        ├── .router.php      # Router definitions
+        ├── indexController.php
+        └── view/
+            └── controller/
+                └── method.phtml  # e.g., view/index/bar.phtml
+
 
 ## -View
 
@@ -120,10 +142,10 @@ docker-compose up -d --remove-orphans
 - router file is under your module path, wihch defined when you put in your enabled module
 - e.g. $modules[] = "/foo";
 - router file is : "foo/.router.php
--       $routers = array(
-      		#"FRONT-URI" => "MODULEPATH/CONTROLLERNAME@METHODNAME"
-      		"/foo/bar" => "/foo/index@bar",
-      	);
+-         $routers = array(
+      		  #"FRONT-URI" => "MODULEPATH/CONTROLLERNAME@METHODNAME"
+      		  "/foo/bar" => "/foo/index@bar",
+          );
 
 ## -Controller
 
