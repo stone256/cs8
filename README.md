@@ -2,6 +2,9 @@
 
 > A simple, fast, and minimal PHP framework.  
 > **Philosophy:** Write less code, achieve more.
+> Not full packed bulky frame
+> Idea for programmer who know php,(js,css)
+> It pack with basic model/view/control function and fast response time for API call
 
 ---
 
@@ -122,22 +125,20 @@ define('_LOAD_VENDOR', true);
 
 * Entry point: `public/index.php`
 * Set your web server document root to:
+    ../your-project-folder/public
 
-```
-/your-project/public
-```
 
 Example:
 
 ```
-http://www.myproject.root → /my-project/public
+http://www.myproject.root → /var/www/my-project/public
 ```
 
 ---
 
 ## 💻 CLI Requests
 
-* Entry file: `x2cli`
+* Entry file: `x2cli` under your project folder
 
 ```bash
 php x2cli [ROUTER] [PARAMETERS]
@@ -146,7 +147,7 @@ php x2cli [ROUTER] [PARAMETERS]
 Example:
 
 ```bash
-php x2cli foo/bar id=5\&date=2008-11-11
+/var/www/my-project/php x2cli foo/bar id=5\&date=2008-11-11
 ```
 
 ---
@@ -170,9 +171,14 @@ config/enabled/YOURMODULE.php
 ```
 
 Example:
-
+ ## config/enabled/foo.php
 ```php
 $modules[] = "/foo";
+```
+or
+ ## config/enabled/welcome_example.php
+```php
+$modules[] = "/welcome/example";
 ```
 
 ---
@@ -200,9 +206,12 @@ module/
 └── YOURMODULE/
     ├── .router.php
     ├── indexController.php
-    └── view/
-        └── controller/
-            └── method.phtml
+    ├── view/
+    │       └── index/
+    │                 ├── gallery.phtml
+    │                 └── about-us.phtml
+    └── model/
+             └── photo.php
 ```
 
 ---
@@ -325,13 +334,5 @@ Start by exploring:
 module/example/
 ```
 
-(if available) for a working reference.
 
-```
 
----
-
-If you want next step, I can:
-- compress this into a **1-page ultra minimal README**
-- or upgrade it into a **professional docs (like Laravel style)**
-```
