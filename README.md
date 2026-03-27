@@ -14,27 +14,27 @@ cs framework is simple and fast php framework with minimum code. Idea for if you
 
 
 
-## naming:
+# naming:
 
-# all php backend
+## all php backend
 - public var name as  $nick_name 
 - local/private $_name [option]
-# all folder 
+## all folder 
 - local-folder/storage/css/new-css-2024
 
 
-# Frontend 
+## Frontend 
 - follow bootstrap/jquery
 - or
 
-# JS
+## JS
 - var server_name
 - private/local _name or js i,j,k,m ....
 - rs short for results or rows  or response
 - r short for record or row
-# HTML
+## HTML
 - attribute id, class ... always like abc-def-0t 
-# CSS
+## CSS
 - .abc-def-0t
 
 
@@ -48,17 +48,17 @@ cs framework is simple and fast php framework with minimum code. Idea for if you
 
 cd dockers
 docker-compose up -d --remove-orphans
-# port 8058
-# set folder ./src to /var/www (of container)
+## port 8058
+## set folder ./src to /var/www (of container)
 
-# also check docker network
-# this allow to docker postgres-db
+## also check docker network
+## this allow to docker postgres-db
 docker network connect docker_default csp8
 
-# this allow to docker mysql 
+## this allow to docker mysql 
 #docker network connect bridge csp8
 
-# start container terminal use docker-desktop
+## start container terminal use docker-desktop
 
 
 # INSTALLATION
