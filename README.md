@@ -14,37 +14,32 @@ cs framework is simple and fast php framework with minimum code. Idea for if you
 
 
 
-# naming:
+# NAMING:
 
-## all php backend
+## -All php backend
 - public var name as  $nick_name 
 - local/private $_name [option]
-## all folder 
+## -All folder 
 - local-folder/storage/css/new-css-2024
 
 
-## Frontend 
+## -Frontend 
 - follow bootstrap/jquery
-- or
 
-## JS
+## -JS
 - var server_name
 - private/local _name or js i,j,k,m ....
 - rs short for results or rows  or response
 - r short for record or row
-## HTML
+## -HTML
 - attribute id, class ... always like abc-def-0t 
-## CSS
+## -CSS
 - .abc-def-0t
 
 
 
 
-
-
-
-
-# running in local docker
+# Running in local docker
 
 cd dockers
 docker-compose up -d --remove-orphans
@@ -82,28 +77,28 @@ docker network connect docker_default csp8
 
 - are handled by "public/index.php"
 - so please point your document-root here
-- e.g. http://www.myproject.com
+- e.g. http://www.myproject.roo -> .../my-project/public
 
 ## Enter point - CLI
 
 - are handled by file "x2cli" under the project folder
 - $php x2cli [ROUTER] [PARAMETERS]
   - e.g.
-  -       $php x2cli foo/bar id=5\&date=2008-11-11
+  -       $/var/www/my-project/php x2cli foo/bar id=5\&date=2008-11-11
 
-## Config
+## Config files
 
 - general: "config/general.php"
 - local: "config/local.php"
 - cli: "config/x2cli.php" - extra for cli
 
-## Module enable
+## Enabling module
 
 - "config/enabled/YOURMODULE.php"
 - e.g. "config/enabled/foo.php"
 -       $modules[] = "/foo";
 
-## Model overwrite
+## Overwriting model
 
 - "config/overwrite/MODEL_2_NEWMODEL.php"
 - e.g. "config/enabled/foo_model_2_bar_model.php"
@@ -115,12 +110,12 @@ docker network connect docker_default csp8
 - "module/YOURMODULE" #all module have to be in there!
 - e.g. "module/foo"
 
-## View
+## -View
 
 - "module/YOURMODEL/view/[controller]/[method].phtml"
 - e.g. "module/foo/view/index/bar.phtml"
 
-## Router mapping
+## -Router mapping
 
 - router file is under your module path, wihch defined when you put in your enabled module
 - e.g. $modules[] = "/foo";
@@ -130,7 +125,7 @@ docker network connect docker_default csp8
       		"/foo/bar" => "/foo/index@bar",
       	);
 
-## Controller
+## -Controller
 
 - controller is defined in the router file
 - e.g. "/foo/bar" => "/foo/index@bar",
