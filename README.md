@@ -47,13 +47,13 @@ docker-compose up -d --remove-orphans
 - set folder ./src to /var/www (of container)
 
 - also check docker network
-- this allow to docker postgres-db
-docker network connect docker_default csp8
+  - #this allow to docker postgres-db 
+  - docker network connect docker_default csp8
 
-- this allow to docker mysql 
-#docker network connect bridge csp8
+  - #this allow to docker mysql 
+  - docker network connect bridge csp8
 
-## start container terminal use docker-desktop
+- start container terminal use docker-desktop
 
 
 # INSTALLATION
