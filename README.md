@@ -43,14 +43,14 @@ cs framework is simple and fast php framework with minimum code. Idea for if you
 
 cd dockers
 docker-compose up -d --remove-orphans
-## port 8058
-## set folder ./src to /var/www (of container)
+- port 8058
+- set folder ./src to /var/www (of container)
 
-## also check docker network
-## this allow to docker postgres-db
+- also check docker network
+- this allow to docker postgres-db
 docker network connect docker_default csp8
 
-## this allow to docker mysql 
+- this allow to docker mysql 
 #docker network connect bridge csp8
 
 ## start container terminal use docker-desktop
